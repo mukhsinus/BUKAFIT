@@ -26,6 +26,7 @@ export default async function FaqPage({ params }: PageProps) {
 
   return (
     <>
+      {/* Полная версия §4.7 без sticky — полноразмерная страница */}
       <FaqFull />
       <FinalCta />
     </>

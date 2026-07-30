@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { TypographicBlock } from "@/components/ui/TypographicBlock";
 import { ScheduleBoard } from "@/components/sections/ScheduleBoard";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { Reveal } from "@/components/motion/Reveal";
 import { buildPageMetadata } from "@/lib/seo";
 import type { AppLocale } from "@/lib/i18n/routing";
 
@@ -27,18 +29,16 @@ export default async function SchedulePage({ params }: PageProps) {
 
   return (
     <>
-      <section className="py-[clamp(4rem,10vw,7.5rem)]">
+      <section className="section-y">
         <div className="container-content">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-brass">
-            {t("eyebrow")}
-          </p>
-          <h1 className="font-display text-display-section uppercase text-smoke">
-            {t("title")}
-          </h1>
-          <p className="mt-3 max-w-2xl text-smoke-muted">{t("description")}</p>
-          <div className="mt-8">
+          <Reveal>
+            <TypographicBlock
+              title={t("title")}
+              lead={t("description")}
+              className="mb-10 lg:mb-12"
+            />
             <ScheduleBoard />
-          </div>
+          </Reveal>
         </div>
       </section>
       <FinalCta />

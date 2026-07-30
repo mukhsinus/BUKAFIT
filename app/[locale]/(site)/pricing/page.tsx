@@ -25,12 +25,24 @@ export async function generateMetadata({
 export default async function PricingPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations("pages.pricing");
 
   return (
     <>
-      <PricingSection showAllPlansLink={false} />
+      <PricingSection
+        showAllPlansLink={false}
+        title={t("pageTitle")}
+        headingLevel="h1"
+      />
       <HowToBuy />
-      <FaqFull categories={["membership", "payment"]} />
+      {/* Заморозка / гостевые / возврат — паттерн §4.7 */}
+      <FaqFull
+        ids={["freeze", "guest", "refund"]}
+        flat
+        headingLevel="h2"
+        title={t("faqTitle")}
+        description={t("faqDescription")}
+      />
       <FinalCta />
     </>
   );

@@ -15,7 +15,7 @@ export function CountUp({
   value,
   suffix = "",
   className,
-  durationMs = 1100,
+  durationMs = 900,
 }: CountUpProps) {
   const reduce = useReducedMotion();
   const [display, setDisplay] = useState(reduce ? value : 0);

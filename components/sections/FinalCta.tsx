@@ -14,19 +14,17 @@ export function FinalCta() {
   const recommended = getRecommendedPlan();
 
   return (
-    <section className="border-t border-line bg-graphite-raised section-y">
+    <section className="section-y border-t border-mineral">
       <Reveal>
-        <div className="container-content max-w-3xl text-center">
-          <h2 className="font-display text-display-section uppercase text-smoke">
+        <div className="container-content max-w-[40rem]">
+          <h2 className="font-display text-display-section text-ink">
             {t("title")}
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-smoke-muted">
-            {t("description")}
-          </p>
-          <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+          <p className="mt-4 max-w-[50ch] text-ink/70">{t("description")}</p>
+          <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
             <button
               type="button"
-              className="btn-brass inline-flex min-h-12 items-center justify-center rounded-sm px-6 text-sm font-semibold"
+              className="btn-pool inline-flex min-h-12 items-center justify-center rounded-none px-6 text-sm font-medium text-chalk"
               onClick={() =>
                 openLead({
                   planId: recommended.id,
@@ -40,14 +38,14 @@ export function FinalCta() {
               href={club.social.salesManagerUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-12 items-center justify-center rounded-sm border border-line px-6 text-sm font-semibold text-smoke hover:border-brass hover:text-brass"
+              className="inline-flex min-h-12 items-center justify-center rounded-none border border-ink px-6 text-sm font-medium text-ink transition-colors duration-200 hover:bg-ink hover:text-chalk"
               onClick={() => trackEvent("click_tg", { source: "final_cta" })}
             >
               {tCta("writeTelegram")}
             </a>
             <a
               href={club.phone.telHref}
-              className="inline-flex min-h-12 items-center justify-center rounded-sm px-4 text-sm font-semibold text-water hover:underline"
+              className="inline-flex min-h-12 items-center justify-center rounded-none px-4 text-sm font-medium text-pool transition-colors duration-200 hover:text-pool-deep"
               onClick={() => trackEvent("click_call", { source: "final_cta" })}
             >
               {tCta("call")}

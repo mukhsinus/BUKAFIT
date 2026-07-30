@@ -3,6 +3,8 @@
 import { useTranslations } from "next-intl";
 import { HeroMedia } from "@/components/media/HeroMedia";
 import { Stagger, StaggerItem } from "@/components/motion/Reveal";
+import { HeroClock } from "@/components/sections/HeroClock";
+import { NowInClub } from "@/components/sections/NowInClub";
 import { useLead } from "@/components/lead/LeadProvider";
 import { club } from "@/content/club";
 import { getRecommendedPlan } from "@/content/plans";
@@ -15,44 +17,70 @@ export function Hero() {
   const recommended = getRecommendedPlan();
 
   return (
-    <section className="relative min-h-[min(100svh,860px)] overflow-hidden">
+    <section className="relative flex h-[100svh] min-h-[100svh] flex-col overflow-hidden bg-ink">
       <HeroMedia mode="image" alt={club.name} src="/media/placeholders/hero.svg" />
-      <div className="relative container-content flex min-h-[min(100svh,860px)] flex-col justify-end pb-24 pt-24 md:pb-16 md:pt-28">
-        <Stagger className="max-w-2xl">
-          <StaggerItem>
-            <h1 className="font-display text-display-hero uppercase text-smoke">
-              <span className="block">{t("headlineLine1")}</span>
-              <span className="block text-brass">{t("headlineLine2")}</span>
-            </h1>
-          </StaggerItem>
-          <StaggerItem>
-            <p className="mt-4 max-w-md text-base text-smoke-muted md:text-lg">
-              {t("subtitle")}
-            </p>
-          </StaggerItem>
-          <StaggerItem>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <button
-                type="button"
-                className="btn-brass inline-flex min-h-12 items-center justify-center rounded-sm px-7 text-sm font-semibold"
-                onClick={() =>
-                  openLead({ planId: recommended.id, source: "hero" })
-                }
-              >
-                {tCta("choosePlan")}
-              </button>
-              <a
-                href={club.social.salesManagerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-12 items-center justify-center rounded-sm border border-line px-6 text-sm font-semibold text-smoke hover:border-brass hover:text-brass"
-                onClick={() => trackEvent("click_tg", { source: "hero" })}
-              >
-                {tCta("writeTelegram")}
-              </a>
+
+      <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
+        <div className="container-content flex flex-1 flex-col pt-[max(5.5rem,env(safe-area-inset-top))] pb-6 md:pb-8">
+          <Stagger className="flex flex-1 flex-col" stagger={0.08}>
+            <StaggerItem>
+              <HeroClock />
+            </StaggerItem>
+
+            <div className="mt-auto w-full">
+              {/* Headline paints immediately (LCP) — no opacity:0 entrance */}
+              <h1 className="font-display text-display-hero text-chalk">
+                <span className="block whitespace-nowrap">{t("headlineLine1")}</span>
+                <span className="block whitespace-nowrap">{t("headlineLine2")}</span>
+              </h1>
+
+              <StaggerItem>
+                <p className="mt-5 max-w-[60ch] text-body-lg text-chalk/85">
+                  {t("subtitle")}
+                </p>
+              </StaggerItem>
+
+              <StaggerItem>
+                <div className="mt-7 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
+                  <button
+                    type="button"
+                    className="btn-pool inline-flex min-h-12 items-center justify-center rounded-none px-7 text-sm font-medium text-chalk"
+                    onClick={() =>
+                      openLead({ planId: recommended.id, source: "hero" })
+                    }
+                  >
+                    {tCta("choosePlan")}
+                  </button>
+                  <a
+                    href={club.social.salesManagerUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex min-h-12 items-center text-sm font-medium text-chalk transition-colors duration-200 hover:text-steam"
+                    onClick={() => trackEvent("click_tg", { source: "hero" })}
+                  >
+                    {t("writeTelegram")}
+                    <span
+                      className="ms-1 inline-block transition-transform duration-200 [@media(hover:hover)]:group-hover:translate-x-1"
+                      aria-hidden
+                    >
+                      →
+                    </span>
+                  </a>
+                </div>
+              </StaggerItem>
             </div>
-          </StaggerItem>
-        </Stagger>
+          </Stagger>
+        </div>
+
+        <div className="border-t border-[rgba(244,245,243,0.14)]">
+          <div className="container-content py-3 md:py-3.5">
+            <Stagger stagger={0.08} delayChildren={0.48}>
+              <StaggerItem>
+                <NowInClub />
+              </StaggerItem>
+            </Stagger>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "clean": "node scripts/clean-next.mjs",
+    "dev": "node scripts/run-next.mjs dev",
+    "dev:clean": "npm run clean && npm run dev",
+    "build": "node scripts/run-next.mjs build",
+    "start": "node scripts/run-next.mjs start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"
   },

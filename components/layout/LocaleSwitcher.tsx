@@ -5,11 +5,20 @@ import { usePathname, useRouter } from "@/lib/i18n/navigation";
 import { locales, type AppLocale } from "@/lib/i18n/routing";
 import { cn } from "@/lib/utils";
 
-export function LocaleSwitcher({ className }: { className?: string }) {
+type LocaleSwitcherProps = {
+  className?: string;
+  tone?: "on-dark" | "on-light";
+};
+
+export function LocaleSwitcher({
+  className,
+  tone = "on-light",
+}: LocaleSwitcherProps) {
   const t = useTranslations("locale");
   const locale = useLocale() as AppLocale;
   const pathname = usePathname();
   const router = useRouter();
+  const onDark = tone === "on-dark";
 
   return (
     <div
@@ -24,10 +33,15 @@ export function LocaleSwitcher({ className }: { className?: string }) {
             key={code}
             type="button"
             className={cn(
-              "min-h-9 min-w-9 rounded-sm px-2 text-xs font-medium uppercase tracking-wide transition-colors",
-              active
-                ? "bg-brass text-graphite"
-                : "text-smoke-muted hover:text-smoke",
+              "font-mono-label min-h-9 min-w-9 rounded-none px-2 transition-colors duration-200",
+              active && "underline decoration-2 underline-offset-4",
+              onDark
+                ? active
+                  ? "text-chalk"
+                  : "text-chalk/55 hover:text-chalk"
+                : active
+                  ? "text-ink"
+                  : "text-ink/45 hover:text-ink",
             )}
             aria-pressed={active}
             onClick={() => {

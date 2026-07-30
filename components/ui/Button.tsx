@@ -9,10 +9,10 @@ type ButtonProps = ComponentPropsWithoutRef<"button"> & {
 };
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "btn-brass",
+  primary: "btn-pool",
   secondary:
-    "border border-line bg-transparent text-smoke hover:border-brass hover:text-brass",
-  ghost: "bg-transparent text-smoke hover:text-brass",
+    "border border-ink bg-transparent text-ink hover:bg-mineral",
+  ghost: "bg-transparent text-ink hover:text-pool",
 };
 
 export function Button({
@@ -26,7 +26,7 @@ export function Button({
     <button
       type={type}
       className={cn(
-        "inline-flex min-h-11 items-center justify-center gap-2 rounded-sm px-5 text-sm font-semibold tracking-wide transition-colors disabled:cursor-not-allowed disabled:opacity-50",
+        "inline-flex min-h-11 items-center justify-center gap-2 rounded-none px-5 text-sm font-medium tracking-wide transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50",
         variants[variant],
         className,
       )}

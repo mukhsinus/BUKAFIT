@@ -1,7 +1,9 @@
 "use client";
 
 import { CountUp } from "@/components/motion/CountUp";
+import { Reveal } from "@/components/motion/Reveal";
 import { club } from "@/content/club";
+import { cn } from "@/lib/utils";
 import type { AppLocale } from "@/lib/i18n/routing";
 
 type FactsStripProps = {
@@ -9,45 +11,38 @@ type FactsStripProps = {
 };
 
 export function FactsStrip({ locale }: FactsStripProps) {
-  const areaSuffix = locale === "ru" ? " м²" : " m²";
-
-  const labels = club.facts.map((fact) => {
-    if (fact.id === "area") {
-      return (
-        <span key={fact.id} className="inline-flex items-baseline">
-          <CountUp value={club.areaSqm} />
-          {areaSuffix}
-        </span>
-      );
-    }
-    return <span key={fact.id}>{fact.label[locale]}</span>;
-  });
-
-  const renderRow = (prefix: string, ariaHidden?: boolean) =>
-    labels.map((node, index) => (
-      <li
-        key={`${prefix}-${index}`}
-        className="inline-flex shrink-0 items-center gap-8 font-display text-sm uppercase tracking-[0.1em] text-smoke md:text-base"
-        aria-hidden={ariaHidden || undefined}
-      >
-        {node}
-        <span className="text-brass" aria-hidden>
-          ·
-        </span>
-      </li>
-    ));
-
   return (
-    <section
-      aria-label="Facts"
-      className="overflow-hidden border-y border-line bg-graphite-elevated"
-    >
-      <div className="relative flex py-3.5 md:py-4">
-        <ul className="flex min-w-max items-center gap-8 pr-8 motion-safe:animate-marquee">
-          {renderRow("a")}
-          {renderRow("b", true)}
-        </ul>
-      </div>
-    </section>
+    <Reveal>
+      <section aria-label="Facts" className="border-y border-mineral bg-chalk">
+        <div className="container-content">
+          <ul className="grid grid-cols-2 lg:grid-cols-4">
+            {club.facts.map((fact, index) => (
+              <li
+                key={fact.id}
+                className={cn(
+                  "py-8",
+                  index % 2 === 1 && "border-l border-mineral pl-5 sm:pl-6",
+                  index < 2 && "border-b border-mineral lg:border-b-0",
+                  index > 0 && "lg:border-l lg:border-mineral lg:pl-8 xl:pl-10",
+                  index % 2 === 0 && "lg:pr-8 xl:pr-10",
+                  index === 0 && "lg:pl-0",
+                )}
+              >
+                <p className="font-display text-[clamp(2rem,4.5vw,3.25rem)] font-medium leading-none tracking-[-0.03em] text-ink">
+                  <CountUp
+                    value={fact.value}
+                    durationMs={900}
+                    suffix={"suffix" in fact ? fact.suffix : ""}
+                  />
+                </p>
+                <p className="mt-3 font-mono-label text-ink/70">
+                  {fact.caption[locale]}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </Reveal>
   );
 }

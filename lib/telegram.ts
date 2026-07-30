@@ -63,7 +63,11 @@ export async function sendLeadToTelegram(
 
   const { token, chatId } = config;
   const text = formatLeadTelegramMessage(lead);
-  const url = `https://api.telegram.org/bot${token}/sendMessage`;
+  const apiBase = (
+    process.env.TELEGRAM_API_BASE?.replace(/\/$/, "") ||
+    "https://api.telegram.org"
+  ).trim();
+  const url = `${apiBase}/bot${token}/sendMessage`;
 
   try {
     const response = await fetch(url, {

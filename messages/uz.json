@@ -42,7 +42,9 @@
     "offer": "Ommaviy oferta",
     "social": "Ijtimoiy tarmoqlar",
     "address": "Manzil",
-    "rights": "Buka FIT. Toshkent."
+    "rights": "Buka FIT. Toshkent.",
+    "timeLabel": "TOSHKENT",
+    "timeAria": "Toshkent mahalliy vaqti {time}"
   },
   "lead": {
     "title": "Ariza qoldirish",
@@ -67,27 +69,39 @@
       "headline": "Zalingiz yopilmaydi",
       "headlineLine1": "Zalingiz",
       "headlineLine2": "yopilmaydi",
-      "subtitle": "Toshkent markazida 2000 m² · basseyn · sauna va hammom · 24/7"
+      "subtitle": "Markazda 2000 m² · basseyn · sauna · 24/7",
+      "city": "Toshkent",
+      "open": "Ochiq",
+      "clockAria": "Toshkent mahalliy vaqti {time}, klub ochiq",
+      "nowInClub": "Hozir klubda",
+      "nowGymOpen": "Hozir · Trenajyor zali ochiq",
+      "writeTelegram": "Telegramga yozish"
     },
     "pricing": {
       "eyebrow": "Abonementlar",
       "title": "Muddatni tanlang",
       "description": "Narxlar — klub tasdiqlaguncha orientir. Ariza qoldiring — menejer tasdiqlaydi va rasmiylashtiradi.",
       "badge": "Foydali tanlov",
-      "allPlans": "Barcha shartlar"
+      "allPlans": "Barcha shartlar",
+      "select": "Tanlash",
+      "dayPassCta": "Ariza qoldirish"
     },
     "services": {
       "eyebrow": "Makon",
       "title": "Ichida nima bor",
       "description": "Zal, suv, issiqlik va shaxsiy format — bir hududda.",
-      "all": "Barcha xizmatlar"
+      "all": "Barcha xizmatlar",
+      "view": "Ko‘rish →",
+      "photoLabel": "FOTO · {zone}"
     },
     "schedule": {
       "eyebrow": "Guruhlar",
       "title": "Bugun klubda",
       "description": "Kunning qisqa ko‘rinishi. To‘liq jadval — schedule sahifasida.",
       "full": "To‘liq jadval",
-      "empty": "Bugun uchun qoralamada mashg‘ulot yo‘q — to‘liq jadvalni ko‘ring."
+      "empty": "Bugun uchun qoralamada mashg‘ulot yo‘q — to‘liq jadvalni ko‘ring.",
+      "daysAria": "Hafta kunlari",
+      "now": "Hozir"
     },
     "trainers": {
       "eyebrow": "Jamoa",
@@ -101,6 +115,7 @@
       "eyebrow": "Muhit",
       "title": "Galereya",
       "description": "Hozircha zona placeholderlari. Haqiqiy fotolar joylashuvni o‘zgartirmasdan almashtiriladi.",
+      "photoLabel": "Foto · {zone}",
       "slots": {
         "gym": "Trenajyor zali",
         "pool": "Basseyn",
@@ -144,6 +159,9 @@
     "pricing": {
       "metaTitle": "Abonementlar va narxlar",
       "metaDescription": "Oy, 6 oy, yil va VIP — Buka FIT. Narxlar saytda — 2 qadamda ariza qoldiring.",
+      "pageTitle": "Abonementlar",
+      "faqTitle": "To‘lov va shartlar",
+      "faqDescription": "Muzlatish, mehmonlar va qaytarish — qisqa. Tafsilotlarni menejer tasdiqlaydi.",
       "howToBuy": {
         "title": "Qanday sotib olish",
         "description": "Uchta qisqa qadam — yashirin narxlarsiz.",
@@ -172,22 +190,33 @@
     },
     "service": {
       "eyebrow": "Xizmat",
-      "forWhom": "Kim uchun"
+      "about": "Zona haqida",
+      "forWhom": "Kim uchun",
+      "relatedPlans": "Bog‘liq tariflar",
+      "photoLabel": "FOTO · {zone}"
     },
     "trainers": {
       "metaTitle": "Murabbiylar",
-      "metaDescription": "Buka FIT jamoasi. Ism va foto klub ma’lumotidan keyin qo‘shiladi."
+      "metaDescription": "Buka FIT jamoasi. Ism va foto klub ma’lumotidan keyin qo‘shiladi.",
+      "pending": "Murabbiylar ismlari, fotosi va yo‘nalishlari klub ma’lumotidan keyin shu yerda paydo bo‘ladi. Saytda o‘ylab topilgan kartochkalar yo‘q — ariza qoldiring, menejer formatni tanlab beradi."
     },
     "contacts": {
       "metaTitle": "Kontaktlar",
-      "metaDescription": "Buka FIT manzili Mirabadda, telefon, Telegram va xarita."
+      "metaDescription": "Buka FIT manzili Mirabadda, telefon, Telegram va xarita.",
+      "title": "Kontaktlar",
+      "lead": "Mirabad, Toshkent markazi. Klub kunu tun ochiq — yozing yoki keling.",
+      "hoursDetail": "24/7 ochiq · dam olish kunisiz, tungi ustamasiz",
+      "salesManager": "Menejer · Telegram @BUKAFIT_SALESMANAGER",
+      "maps": "Xaritalar"
     },
     "about": {
       "metaTitle": "Klub haqida",
       "metaDescription": "Buka FIT — Toshkent markazida 2000 m² fitness 24/7.",
       "eyebrow": "Klub",
       "title": "Buka FIT haqida",
-      "body": "Buka FIT — Toshkent markazida 2000 m² fitness hududi. Klub kunu tun ochiq: zal, basseyn, kiyinish xonalaridagi sauna va hammom, guruh dasturlari va shaxsiy format — bitta maydonda."
+      "body": "Buka FIT — Toshkent markazida 2000 m² fitness hududi. Klub kunu tun ochiq: zal, basseyn, kiyinish xonalaridagi sauna va hammom, guruh dasturlari va shaxsiy format — bitta maydonda.",
+      "body2": "Klub urg‘usi — suv va tiklanish: 16 m basseyn, uch yo‘lak, har kiyinish xonasida fin saunasi va hammom. O‘z ritmingizda mashq qiling — zal yopilmaydi.",
+      "photoLabel": "FOTO · {zone}"
     },
     "faq": {
       "metaTitle": "FAQ",

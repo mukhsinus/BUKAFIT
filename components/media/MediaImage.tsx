@@ -60,7 +60,7 @@ export function MediaImage({
   const src = SLOT_SRC[slot];
 
   return (
-    <div className={cn("relative overflow-hidden bg-surface-muted", className)}>
+    <div className={cn("relative overflow-hidden bg-mineral", className)}>
       {fill ? (
         <Image
           src={src}
@@ -68,7 +68,7 @@ export function MediaImage({
           fill
           sizes={sizes}
           priority={priority}
-          className="object-cover"
+          className="object-cover brightness-[0.92]"
         />
       ) : (
         <Image
@@ -78,18 +78,19 @@ export function MediaImage({
           height={height ?? 1200}
           sizes={sizes}
           priority={priority}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover brightness-[0.92]"
         />
       )}
       {overlay === "bottom" ? (
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite/75 via-graphite/20 to-transparent"
-          aria-hidden
-        />
+        <div className="pointer-events-none absolute inset-0 photo-scrim" aria-hidden />
       ) : null}
       {overlay === "full" ? (
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/55 to-graphite/20"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(16,20,24,0.85) 0%, rgba(16,20,24,0.45) 55%, rgba(16,20,24,0.2) 100%)",
+          }}
           aria-hidden
         />
       ) : null}

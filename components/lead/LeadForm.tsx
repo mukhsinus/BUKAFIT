@@ -13,6 +13,7 @@ import { dayPass, getPlanById, plans } from "@/content/plans";
 import { club } from "@/content/club";
 import { trackEvent } from "@/lib/analytics";
 import { formatUzPhoneInput, toE164Uz } from "@/lib/phone";
+import { cn } from "@/lib/utils";
 import type { AppLocale } from "@/lib/i18n/routing";
 import type { LeadPlanId } from "@/lib/validations/lead";
 
@@ -126,13 +127,13 @@ export function LeadForm() {
   if (status === "success") {
     return (
       <div className="space-y-5">
-        <p className="text-success">{t("successTitle")}</p>
-        <p className="text-sm text-smoke-muted">{t("successBody")}</p>
+        <p className="font-medium text-pool">{t("successTitle")}</p>
+        <p className="text-sm text-ink/70">{t("successBody")}</p>
         <a
           href={telegramHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-brass inline-flex min-h-11 w-full items-center justify-center rounded-sm px-5 text-sm font-semibold"
+          className="btn-pool inline-flex min-h-11 w-full items-center justify-center rounded-none px-5 text-sm font-medium"
           onClick={() => trackEvent("click_tg", { source: "lead_success" })}
         >
           {t("writeTelegramNow")}
@@ -146,8 +147,8 @@ export function LeadForm() {
 
   return (
     <form className="space-y-4" onSubmit={onSubmit} noValidate>
-      <div className="rounded-sm border border-line bg-graphite/60 p-3">
-        <p className="text-xs text-smoke-muted">{t("selectedPlan")}</p>
+      <div className="rounded-none border border-mineral bg-chalk p-3">
+        <p className="font-mono-label text-ink/55">{t("selectedPlan")}</p>
         <div className="mt-2 flex flex-wrap gap-2">
           {plans.map((plan) => (
             <PlanChip
@@ -178,7 +179,7 @@ export function LeadForm() {
           />
         </div>
         {selectedLabel ? (
-          <p className="mt-2 text-sm font-medium text-brass">{selectedLabel}</p>
+          <p className="mt-2 text-sm font-medium text-pool">{selectedLabel}</p>
         ) : null}
       </div>
 
@@ -213,13 +214,13 @@ export function LeadForm() {
       </div>
 
       {status === "error" ? (
-        <div className="space-y-2 rounded-sm border border-danger/50 bg-danger/10 p-3 text-sm">
-          <p className="text-danger">{t("errorTitle")}</p>
-          <p className="text-smoke-muted">{t("errorBody")}</p>
+        <div className="space-y-2 rounded-none border border-ink bg-mineral p-3 text-sm">
+          <p className="font-medium text-ink">{t("errorTitle")}</p>
+          <p className="text-ink/70">{t("errorBody")}</p>
           <div className="flex flex-wrap gap-3 pt-1">
             <a
               href={club.phone.telHref}
-              className="font-semibold text-brass hover:text-brass-hover"
+              className="font-medium text-pool hover:text-pool-deep"
               onClick={() => trackEvent("click_call", { source: "lead_error" })}
             >
               {tCta("call")}
@@ -228,7 +229,7 @@ export function LeadForm() {
               href={telegramHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-brass hover:text-brass-hover"
+              className="font-medium text-pool hover:text-pool-deep"
               onClick={() => trackEvent("click_tg", { source: "lead_error" })}
             >
               {tCta("writeTelegram")}
@@ -257,11 +258,14 @@ function PlanChip({
     <button
       type="button"
       onClick={onClick}
-      className={
+      aria-pressed={active}
+      className={cn(
+        "font-mono-label px-3 py-1.5 transition-colors duration-200",
+        "rounded-[var(--radius-pill)]",
         active
-          ? "rounded-sm border border-brass bg-brass/15 px-2.5 py-1 text-xs font-medium text-brass"
-          : "rounded-sm border border-line px-2.5 py-1 text-xs text-smoke-muted hover:border-brass/60 hover:text-smoke"
-      }
+          ? "bg-ink text-chalk"
+          : "bg-mineral text-ink/70 hover:text-ink",
+      )}
     >
       {label}
     </button>

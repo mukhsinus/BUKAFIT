@@ -19,12 +19,12 @@ export function Input({
 
   return (
     <label className="flex w-full flex-col gap-1.5 text-sm">
-      <span className="font-medium text-smoke">{label}</span>
+      <span className="font-medium text-ink">{label}</span>
       <input
         id={inputId}
         className={cn(
-          "min-h-11 rounded-sm border bg-graphite px-3 text-smoke placeholder:text-smoke-muted/70",
-          error ? "border-danger" : "border-line focus:border-brass",
+          "min-h-11 rounded-none border bg-steam px-3 text-ink placeholder:text-ink/40",
+          error ? "border-ink" : "border-mineral hover:border-ink/40",
           className,
         )}
         aria-invalid={Boolean(error)}
@@ -34,12 +34,12 @@ export function Input({
         {...props}
       />
       {hint && !error ? (
-        <span id={`${inputId}-hint`} className="text-xs text-smoke-muted">
+        <span id={`${inputId}-hint`} className="text-xs text-ink/55">
           {hint}
         </span>
       ) : null}
       {error ? (
-        <span id={`${inputId}-error`} className="text-xs text-danger" role="alert">
+        <span id={`${inputId}-error`} className="text-xs text-ink" role="alert">
           {error}
         </span>
       ) : null}

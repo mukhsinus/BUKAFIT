@@ -1,0 +1,108 @@
+[
+  {
+    "width": 360,
+    "overflowX": false,
+    "headlineLines": {
+      "lineCount": 2,
+      "lines": [
+        {
+          "text": "Твой зал",
+          "height": 37,
+          "width": 320
+        },
+        {
+          "text": "не закрывается",
+          "height": 37,
+          "width": 320
+        }
+      ]
+    },
+    "prices": [
+      {
+        "text": "1 500 000сум",
+        "amountFontSize": "24px",
+        "amountFont": "\"JetBrains Mono\", \"JetBrains Mono Fallback\", ui-monospace, monospace",
+        "priceW": 158,
+        "rowW": 320,
+        "overflows": false
+      },
+      {
+        "text": "7 500 000сум",
+        "amountFontSize": "24px",
+        "amountFont": "\"JetBrains Mono\", \"JetBrains Mono Fallback\", ui-monospace, monospace",
+        "priceW": 158,
+        "rowW": 320,
+        "overflows": false
+      },
+      {
+        "text": "10 000 000сум",
+        "amountFontSize": "24px",
+        "amountFont": "\"JetBrains Mono\", \"JetBrains Mono Fallback\", ui-monospace, monospace",
+        "priceW": 172,
+        "rowW": 320,
+        "overflows": false
+      },
+      {
+        "text": "15 000 000сум",
+        "amountFontSize": "24px",
+        "amountFont": "\"JetBrains Mono\", \"JetBrains Mono Fallback\", ui-monospace, monospace",
+        "priceW": 172,
+        "rowW": 320,
+        "overflows": false
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "overflowX": false,
+    "headlineLines": {
+      "lineCount": 2,
+      "lines": [
+        {
+          "text": "Твой зал",
+          "height": 99,
+          "width": 1312
+        },
+        {
+          "text": "не закрывается",
+          "height": 99,
+          "width": 1312
+        }
+      ]
+    },
+    "prices": [
+      {
+        "text": "1 500 000сум",
+        "amountFontSize": "44px",
+        "amountFont": "\"JetBrains Mono\", \"JetBrains Mono Fallback\", ui-monospace, monospace",
+        "priceW": 266,
+        "rowW": 1312,
+        "overflows": false
+      },
+      {
+        "text": "7 500 000сум",
+        "amountFontSize": "44px",
+        "amountFont": "\"JetBrains Mono\", \"JetBrains Mono Fallback\", ui-monospace, monospace",
+        "priceW": 266,
+        "rowW": 1312,
+        "overflows": false
+      },
+      {
+        "text": "10 000 000сум",
+        "amountFontSize": "44px",
+        "amountFont": "\"JetBrains Mono\", \"JetBrains Mono Fallback\", ui-monospace, monospace",
+        "priceW": 292,
+        "rowW": 1312,
+        "overflows": false
+      },
+      {
+        "text": "15 000 000сум",
+        "amountFontSize": "44px",
+        "amountFont": "\"JetBrains Mono\", \"JetBrains Mono Fallback\", ui-monospace, monospace",
+        "priceW": 292,
+        "rowW": 1312,
+        "overflows": false
+      }
+    ]
+  }
+]

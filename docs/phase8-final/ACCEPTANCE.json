@@ -1,0 +1,164 @@
+{
+  "generatedAt": "2026-07-30T16:21:50.268Z",
+  "base": "http://127.0.0.1:3460",
+  "checklist": [
+    {
+      "id": "10.8-robots-noindex",
+      "ok": true,
+      "evidence": "GET /robots.txt → 200; body starts:\nUser-Agent: * | Disallow: / |  | "
+    },
+    {
+      "id": "10.8-meta-noindex",
+      "ok": true,
+      "evidence": "HTML /ru contains robots noindex,nofollow (NEXT_PUBLIC_NOINDEX=true)"
+    },
+    {
+      "id": "10.8-jsonld",
+      "ok": true,
+      "evidence": "@type=SportsActivityLocation; geo={\"@type\":\"GeoCoordinates\",\"latitude\":41.2995,\"longitude\":69.2797}; opens=00:00-23:59"
+    },
+    {
+      "id": "10.6-hreflang",
+      "ok": true,
+      "evidence": "hreflang ru/uz/en present in /ru HTML"
+    },
+    {
+      "id": "10.5-pages",
+      "ok": true,
+      "evidence": "All 20 routes OK; 404 status=404. Sample: /ru:200, /ru/pricing:200, /ru/schedule:200, /ru/services/gym:200, /ru/services/pool:200"
+    },
+    {
+      "id": "10.4-lead-validation",
+      "ok": true,
+      "evidence": "POST invalid → 400 {\"ok\":false,\"error\":\"validation\",\"issues\":[{\"path\":\"name\",\"message\":\"name_min\"},{\"path\":\"phone\",\"message\":\"invalid_phone\"}]}"
+    },
+    {
+      "id": "10.4-telegram-delivery",
+      "ok": true,
+      "evidence": "POST /api/lead → 200 ok=true id=8baa40f7-c258-4664-ad28-1cb1f7ad07e2"
+    },
+    {
+      "id": "10.10-docs",
+      "ok": true,
+      "evidence": "Present with sizes: {\"CONTENT_TODO.md\":4907,\"public/media/README.md\":1173,\".env.example\":1109,\"README.md\":2589,\"docs/design-plan.md\":15801}"
+    },
+    {
+      "id": "10.3-prices-visible",
+      "ok": true,
+      "evidence": "Found 5 prices without click: 1 500 000сум · 7 500 000сум · 10 000 000сум · 15 000 000сум · 250 000сум"
+    },
+    {
+      "id": "10.3-three-actions",
+      "ok": true,
+      "evidence": "1) sticky «Записаться» → modal; 2) имя+телефон; 3) «Оставить заявку»"
+    },
+    {
+      "id": "10.9-analytics-runtime",
+      "ok": true,
+      "evidence": "console: [analytics] open_lead_form {source: sticky_bar} | [analytics] open_lead_form {planId: undefined, source: sticky_bar, path: /ru}"
+    },
+    {
+      "id": "10.6-locale-switch",
+      "ok": true,
+      "evidence": "RU h1=\"Абонементы\" ≠ UZ h1=\"Abonementlar\""
+    },
+    {
+      "id": "10.7-reduced-motion",
+      "ok": true,
+      "evidence": "CSS @media (prefers-reduced-motion: reduce) present; Framer useReducedMotion in Reveal/Schedule/template"
+    },
+    {
+      "id": "10.7-keyboard",
+      "ok": true,
+      "evidence": "After Tab×3 focus on <BUTTON> \"UZ\" outline=solid"
+    },
+    {
+      "id": "10.2-sticky-safearea",
+      "ok": true,
+      "evidence": "360px stickyH=64 shell padBottom=68px bar paddingBottom=0px (iOS safe-area sim 34px)"
+    },
+    {
+      "id": "10.11-open-now",
+      "ok": true,
+      "evidence": "HeroClock visible: \"ТАШКЕНТ · 21:20 · ОТКРЫТО\""
+    },
+    {
+      "id": "10.4-lead-ui-states",
+      "ok": true,
+      "evidence": "Success state shown (Telegram delivered)"
+    },
+    {
+      "id": "10.2-visual-overflow",
+      "ok": true,
+      "evidence": "No horizontal overflow / clipped text across 50 page×width checks"
+    }
+  ],
+  "visualSummary": {
+    "checks": 50,
+    "overflow": 0,
+    "clipped": 0
+  },
+  "issues": [],
+  "screenshots": [
+    "404-1024.png",
+    "404-1440.png",
+    "404-360.png",
+    "404-390.png",
+    "404-768.png",
+    "about-1024.png",
+    "about-1440.png",
+    "about-360.png",
+    "about-390.png",
+    "about-768.png",
+    "contacts-1024.png",
+    "contacts-1440.png",
+    "contacts-360.png",
+    "contacts-390.png",
+    "contacts-768.png",
+    "faq-1024.png",
+    "faq-1440.png",
+    "faq-360.png",
+    "faq-390.png",
+    "faq-768.png",
+    "home-1024.png",
+    "home-1440.png",
+    "home-360.png",
+    "home-390.png",
+    "home-768.png",
+    "lead-1024.png",
+    "lead-1440.png",
+    "lead-360.png",
+    "lead-390.png",
+    "lead-768.png",
+    "legal-offer-1024.png",
+    "legal-offer-1440.png",
+    "legal-offer-360.png",
+    "legal-offer-390.png",
+    "legal-offer-768.png",
+    "legal-privacy-1024.png",
+    "legal-privacy-1440.png",
+    "legal-privacy-360.png",
+    "legal-privacy-390.png",
+    "legal-privacy-768.png",
+    "menu-1024.png",
+    "menu-1440.png",
+    "menu-360.png",
+    "menu-390.png",
+    "menu-768.png",
+    "pricing-1024.png",
+    "pricing-1440.png",
+    "pricing-360.png",
+    "pricing-390.png",
+    "pricing-768.png",
+    "schedule-1024.png",
+    "schedule-1440.png",
+    "schedule-360.png",
+    "schedule-390.png",
+    "schedule-768.png",
+    "services-gym-1024.png",
+    "services-gym-1440.png",
+    "services-gym-360.png",
+    "services-gym-390.png",
+    "services-gym-768.png"
+  ]
+}

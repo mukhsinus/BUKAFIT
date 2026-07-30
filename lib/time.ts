@@ -11,6 +11,26 @@ export function formatTashkentTime(date: Date = new Date()): string {
   }).format(date);
 }
 
+/** Минуты с полуночи Asia/Tashkent */
+export function getTashkentMinutes(date: Date = new Date()): number {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: TASHKENT,
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(date);
+
+  const hour = Number(parts.find((p) => p.type === "hour")?.value ?? "0");
+  const minute = Number(parts.find((p) => p.type === "minute")?.value ?? "0");
+  return hour * 60 + minute;
+}
+
+/** HH:mm → минуты с полуночи */
+export function parseHmToMinutes(time: string): number {
+  const [h = "0", m = "0"] = time.split(":");
+  return Number(h) * 60 + Number(m);
+}
+
 /** Понедельник = 0 … Воскресенье = 6 (как в content/schedule) */
 export function getTashkentWeekday(date: Date = new Date()): number {
   const day = new Intl.DateTimeFormat("en-US", {

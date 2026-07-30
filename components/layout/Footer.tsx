@@ -2,6 +2,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/lib/i18n/navigation";
 import { club } from "@/content/club";
 import { FEATURES } from "@/content/features";
+import { FooterClock } from "@/components/layout/FooterClock";
 import type { AppLocale } from "@/lib/i18n/routing";
 
 const footerNav = [
@@ -24,100 +25,102 @@ export async function Footer() {
   const address = club.address.full[locale];
 
   return (
-    <footer className="border-t border-line bg-graphite-elevated">
-      <div className="container-content grid gap-10 py-12 md:grid-cols-12 md:gap-6 md:py-16 lg:gap-8">
-        <div className="min-w-0 md:col-span-4">
-          <p className="font-display text-2xl uppercase tracking-[0.04em] text-smoke">
-            {club.name}
-          </p>
-          <p className="mt-3 max-w-sm text-sm text-smoke-muted">{t("tagline")}</p>
-          <p className="mt-4 text-sm font-medium text-brass">{t("hours")}</p>
-        </div>
+    <footer className="bg-ink text-chalk">
+      <div className="container-content py-12 md:py-16">
+        <p className="font-display text-display-section w-full text-chalk">
+          {club.name}
+        </p>
 
-        <div className="min-w-0 md:col-span-3">
-          <p className="text-xs font-semibold uppercase tracking-wider text-smoke-muted">
-            {tNav("home")}
-          </p>
-          <ul className="mt-3 space-y-2">
-            {footerNav.map((item) => (
-              <li key={item.href}>
+        <div className="mt-12 grid gap-10 border-t border-[rgba(244,245,243,0.14)] pt-10 md:grid-cols-3 md:gap-8">
+          <div className="min-w-0">
+            <p className="font-mono-label text-chalk/55">{tNav("home")}</p>
+            <ul className="mt-4 space-y-3">
+              {footerNav.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-chalk/85 transition-colors hover:text-chalk"
+                  >
+                    {tNav(item.key)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="min-w-0">
+            <p className="font-mono-label text-chalk/55">{t("address")}</p>
+            <p className="mt-4 text-sm text-chalk/85">{address}</p>
+            <a
+              href={club.phone.telHref}
+              className="mt-3 block text-sm text-chalk/85 transition-colors hover:text-chalk"
+            >
+              {club.phone.display}
+            </a>
+            <a
+              href={club.social.telegramChannelUrl}
+              className="mt-2 block text-sm text-chalk/85 transition-colors hover:text-chalk"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Telegram @{club.social.telegramChannel}
+            </a>
+            <a
+              href={club.social.instagramUrl}
+              className="mt-2 block text-sm text-chalk/85 transition-colors hover:text-chalk"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Instagram @{club.social.instagram}
+            </a>
+            <a
+              href={club.social.salesManagerUrl}
+              className="mt-4 inline-flex text-sm font-medium text-pool transition-colors hover:text-chalk"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {tCta("writeTelegram")}
+            </a>
+          </div>
+
+          <div className="min-w-0">
+            <p className="font-mono-label text-chalk/55">{t("legal")}</p>
+            <ul className="mt-4 space-y-3">
+              <li>
                 <Link
-                  href={item.href}
-                  className="text-sm text-smoke hover:text-brass"
+                  href="/legal/privacy"
+                  className="break-words text-sm text-chalk/85 transition-colors hover:text-chalk"
                 >
-                  {tNav(item.key)}
+                  {t("privacy")}
                 </Link>
               </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="min-w-0 md:col-span-3">
-          <p className="text-xs font-semibold uppercase tracking-wider text-smoke-muted">
-            {t("address")}
-          </p>
-          <p className="mt-3 text-sm text-smoke">{address}</p>
-          <a
-            href={club.phone.telHref}
-            className="mt-3 block text-sm text-smoke hover:text-brass"
-          >
-            {club.phone.display}
-          </a>
-          <a
-            href={club.social.telegramChannelUrl}
-            className="mt-2 block text-sm text-smoke hover:text-brass"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Telegram @{club.social.telegramChannel}
-          </a>
-          <a
-            href={club.social.instagramUrl}
-            className="mt-2 block text-sm text-smoke hover:text-brass"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Instagram @{club.social.instagram}
-          </a>
-          <a
-            href={club.social.salesManagerUrl}
-            className="mt-4 inline-flex text-sm font-semibold text-brass hover:text-brass-hover"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {tCta("writeTelegram")}
-          </a>
-        </div>
-
-        <div className="min-w-0 md:col-span-2">
-          <p className="text-xs font-semibold uppercase tracking-wider text-smoke-muted">
-            {t("legal")}
-          </p>
-          <ul className="mt-3 space-y-2">
-            <li>
-              <Link
-                href="/legal/privacy"
-                className="break-words text-sm text-smoke hover:text-brass"
-              >
-                {t("privacy")}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/legal/offer"
-                className="break-words text-sm text-smoke hover:text-brass"
-              >
-                {t("offer")}
-              </Link>
-            </li>
-          </ul>
+              <li>
+                <Link
+                  href="/legal/offer"
+                  className="break-words text-sm text-chalk/85 transition-colors hover:text-chalk"
+                >
+                  {t("offer")}
+                </Link>
+              </li>
+            </ul>
+            <p className="mt-6 text-sm text-chalk/70">{t("tagline")}</p>
+            <p className="mt-2 font-mono-label text-chalk/55">{t("hours")}</p>
+          </div>
         </div>
       </div>
 
-      <div className="border-t border-line">
-        <div className="container-content flex flex-col gap-2 py-5 text-xs text-smoke-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>{t("rights")}</p>
-          <p>{club.phone.display}</p>
+      <div className="border-t border-[rgba(244,245,243,0.14)]">
+        <div className="container-content flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between">
+          <FooterClock />
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-chalk/55">
+            <p>{t("rights")}</p>
+            <Link href="/legal/privacy" className="hover:text-chalk">
+              {t("privacy")}
+            </Link>
+            <Link href="/legal/offer" className="hover:text-chalk">
+              {t("offer")}
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

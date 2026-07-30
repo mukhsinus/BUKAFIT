@@ -1,34 +1,22 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
-
-type NavTitleKey =
-  | "pricing"
-  | "schedule"
-  | "services"
-  | "trainers"
-  | "contacts"
-  | "about"
-  | "faq";
+import { getTranslations } from "next-intl/server";
 
 type PhaseStubProps = {
-  locale: string;
-  titleKey?: NavTitleKey;
+  phase: string;
 };
 
-/** Минимальная заглушка страницы до Фазы 3/4. */
-export async function PhaseStub({ locale, titleKey }: PhaseStubProps) {
-  setRequestLocale(locale);
+/** Временная заглушка фазы — без карточек, типографика фазы 8. */
+export async function PhaseStub({ phase }: PhaseStubProps) {
   const t = await getTranslations("phase");
-  const tNav = titleKey ? await getTranslations("nav") : null;
 
   return (
-    <section className="container-content py-16 md:py-24">
-      {titleKey && tNav ? (
-        <h1 className="font-display text-display-section uppercase text-smoke">
-          {tNav(titleKey)}
+    <section className="section-y">
+      <div className="container-content max-w-[42rem]">
+        <p className="font-mono-label text-ink/50">{phase}</p>
+        <h1 className="mt-3 font-display text-display-section text-ink">
+          {t("stubTitle")}
         </h1>
-      ) : null}
-      <h2 className="mt-4 text-lg font-semibold text-brass">{t("stubTitle")}</h2>
-      <p className="mt-3 max-w-xl text-smoke-muted">{t("stubBody")}</p>
+        <p className="mt-4 text-ink/70">{t("stubBody")}</p>
+      </div>
     </section>
   );
 }

@@ -26,18 +26,16 @@ export async function TrainersPreview({
         <Reveal>
           <div className="mb-7 flex flex-col gap-3 md:mb-8 md:flex-row md:items-end md:justify-between">
             <div className="max-w-xl">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-brass">
-                {t("eyebrow")}
-              </p>
-              <h2 className="font-display text-display-section uppercase text-smoke">
+              <p className="font-mono-label text-ink/55">{t("eyebrow")}</p>
+              <h2 className="font-display text-display-section text-ink">
                 {t("title")}
               </h2>
-              <p className="mt-2 text-sm text-smoke-muted">{t("description")}</p>
+              <p className="mt-2 text-sm text-ink/70">{t("description")}</p>
             </div>
             {showAllLink ? (
               <Link
                 href="/trainers"
-                className="shrink-0 text-sm font-semibold text-brass hover:text-brass-hover"
+                className="shrink-0 text-sm font-medium text-pool hover:text-pool-deep"
               >
                 {t("all")}
               </Link>
@@ -47,11 +45,8 @@ export async function TrainersPreview({
 
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {trainers.map((trainer) => (
-            <li
-              key={trainer.id}
-              className="border border-line bg-graphite-elevated p-3.5"
-            >
-              <div className="relative mb-3 aspect-[3/4] overflow-hidden bg-graphite-mid">
+            <li key={trainer.id} className="border-t border-mineral pt-3.5">
+              <div className="relative mb-3 aspect-[3/4] overflow-hidden bg-mineral">
                 <MediaImage
                   slot="trainers"
                   alt=""
@@ -59,18 +54,18 @@ export async function TrainersPreview({
                   className="absolute inset-0"
                 />
               </div>
-              <h3 className="font-display text-lg uppercase text-smoke">
+              <h3 className="font-display text-lg text-ink">
                 {trainer.name[locale]}
               </h3>
-              <p className="mt-1.5 text-sm text-smoke-muted">
+              <p className="mt-1.5 text-sm text-ink/70">
                 {trainer.specialization[locale]}
               </p>
               {trainer.yearsExperience != null ? (
-                <p className="mt-2 text-xs text-brass">
+                <p className="mt-2 text-xs text-pool">
                   {t("experience", { years: trainer.yearsExperience })}
                 </p>
               ) : (
-                <p className="mt-2 text-xs text-smoke-muted">{t("experienceTodo")}</p>
+                <p className="mt-2 text-xs text-ink/55">{t("experienceTodo")}</p>
               )}
             </li>
           ))}

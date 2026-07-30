@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Header } from "@/components/layout/Header";
+import { HeaderSpacer } from "@/components/layout/HeaderSpacer";
 import { Footer } from "@/components/layout/Footer";
 import { LeadProvider } from "@/components/lead/LeadProvider";
 import { LeadModal } from "@/components/lead/LeadModal";
@@ -14,6 +15,7 @@ export default function SiteLayout({ children }: SiteLayoutProps) {
     <LeadProvider>
       <div className="flex min-h-dvh flex-col pb-[calc(4.25rem+env(safe-area-inset-bottom))] md:pb-0">
         <Header />
+        <HeaderSpacer />
         <main className="flex-1">{children}</main>
         <Footer />
         <StickyCtaBar />

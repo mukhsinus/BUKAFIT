@@ -1,8 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/motion/Reveal";
 
+/** «Как купить» — типографический нумерованный список mono, без карточек. */
 export function HowToBuy() {
   const t = useTranslations("pages.pricing.howToBuy");
 
@@ -13,23 +14,35 @@ export function HowToBuy() {
   ];
 
   return (
-    <section className="border-t border-line py-[clamp(3rem,8vw,5rem)]">
+    <section className="section-y !pt-0">
       <div className="container-content">
-        <SectionHeading title={t("title")} description={t("description")} />
-        <ol className="grid gap-4 md:grid-cols-3">
-          {steps.map((step, index) => (
-            <li
-              key={step.title}
-              className="border border-line bg-graphite-elevated p-5"
-            >
-              <p className="font-display text-2xl text-brass">{index + 1}</p>
-              <h3 className="mt-3 font-display text-lg uppercase text-smoke">
-                {step.title}
-              </h3>
-              <p className="mt-2 text-sm text-smoke-muted">{step.body}</p>
-            </li>
-          ))}
-        </ol>
+        <Reveal>
+          <h2 className="font-display text-display-section text-ink">
+            {t("title")}
+          </h2>
+          <p className="mt-4 max-w-[62ch] text-ink/70">{t("description")}</p>
+
+          <ol className="mt-10 border-y border-mineral">
+            {steps.map((step, index) => (
+              <li
+                key={step.title}
+                className="grid grid-cols-[3.5rem_1fr] gap-4 border-b border-mineral py-6 last:border-b-0 md:grid-cols-[4.5rem_1fr] md:gap-8 md:py-8"
+              >
+                <span className="font-mono-label tabular-nums text-ink/50">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="font-display text-display-h3 text-ink">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 max-w-[50ch] text-[0.9375rem] leading-relaxed text-ink/70">
+                    {step.body}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
       </div>
     </section>
   );

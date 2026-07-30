@@ -3,24 +3,36 @@ import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
-import { Manrope, Unbounded } from "next/font/google";
+import { Geologica, JetBrains_Mono, Onest } from "next/font/google";
 import { AnalyticsScripts } from "@/components/analytics/AnalyticsScripts";
 import { ClubJsonLd } from "@/components/seo/ClubJsonLd";
 import { routing, type AppLocale } from "@/lib/i18n/routing";
 import { buildPageMetadata, isNoIndex, siteOrigin } from "@/lib/seo";
 import "../globals.css";
 
-const manrope = Manrope({
+const geologica = Geologica({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-manrope",
+  variable: "--font-geologica",
   display: "swap",
+  weight: ["600"],
+  adjustFontFallback: true,
 });
 
-const unbounded = Unbounded({
+const onest = Onest({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-unbounded",
+  variable: "--font-onest",
   display: "swap",
-  weight: ["500", "600", "700"],
+  weight: ["400", "500"],
+  adjustFontFallback: true,
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+  weight: ["400"],
+  preload: false,
+  adjustFontFallback: true,
 });
 
 type LocaleLayoutProps = {
@@ -88,7 +100,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${manrope.variable} ${unbounded.variable}`}
+      className={`${geologica.variable} ${onest.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <body>

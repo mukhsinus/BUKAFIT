@@ -26,7 +26,7 @@ export default async function ContactsPage({ params }: PageProps) {
 
   return (
     <>
-      <ContactsMap />
+      <ContactsMap detailed />
       <FinalCta />
     </>
   );

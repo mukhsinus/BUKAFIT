@@ -26,7 +26,7 @@ export default async function ServicesPage({ params }: PageProps) {
 
   return (
     <>
-      <ServicesGrid showAllLink={false} />
+      <ServicesGrid />
       <FinalCta />
     </>
   );

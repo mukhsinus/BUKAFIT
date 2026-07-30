@@ -37,7 +37,7 @@ export function OpenNowBadge({ className, size = "sm" }: OpenNowBadgeProps) {
   return (
     <p
       className={cn(
-        "inline-flex items-center gap-2 text-smoke",
+        "inline-flex items-center gap-2 text-chalk",
         size === "sm" ? "text-xs md:text-sm" : "text-sm md:text-base",
         className,
       )}
@@ -47,12 +47,12 @@ export function OpenNowBadge({ className, size = "sm" }: OpenNowBadgeProps) {
         className="relative flex h-2 w-2 shrink-0"
         aria-hidden
       >
-        <span className="absolute inset-0 rounded-full bg-brass motion-safe:animate-open-pulse" />
-        <span className="relative h-2 w-2 rounded-full bg-brass" />
+        <span className="absolute inset-0 rounded-full bg-pool motion-safe:animate-open-pulse" />
+        <span className="relative h-2 w-2 rounded-full bg-pool" />
       </span>
       <span className="min-w-0">
         <span className="whitespace-nowrap">{t("label")}</span>
-        <span className="hidden text-smoke-muted sm:inline"> · {time}</span>
+        <span className="hidden text-chalk/70 sm:inline"> · {time}</span>
       </span>
     </p>
   );

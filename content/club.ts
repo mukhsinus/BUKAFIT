@@ -49,38 +49,38 @@ export const club = {
     dualGisUrl: "https://2gis.uz/tashkent/search/Buka%20FIT",
   },
   facts: [
-    { id: "247", label: { ru: "24/7", uz: "24/7", en: "24/7" } },
     {
       id: "area",
+      value: 2000,
+      caption: { ru: "м²", uz: "m²", en: "m²" },
+      label: { ru: "2000 м²", uz: "2000 m²", en: "2000 m²" },
+    },
+    {
+      id: "hours",
+      value: 24,
+      suffix: "/7",
+      caption: { ru: "режим", uz: "rejim", en: "hours" },
+      label: { ru: "24/7", uz: "24/7", en: "24/7" },
+    },
+    {
+      id: "lanes",
+      value: 16,
+      caption: {
+        ru: "м · 3 дорожки",
+        uz: "m · 3 yo‘lak",
+        en: "m · 3 lanes",
+      },
       label: {
-        ru: "2000 м²",
-        uz: "2000 m²",
-        en: "2000 m²",
+        ru: "16 м · 3 дорожки",
+        uz: "16 m · 3 yo‘lak",
+        en: "16 m · 3 lanes",
       },
     },
     {
-      id: "pool",
-      label: {
-        ru: "Бассейн",
-        uz: "Basseyn",
-        en: "Pool",
-      },
-    },
-    {
-      id: "spa",
-      label: {
-        ru: "Сауна и хаммам",
-        uz: "Sauna va hammom",
-        en: "Sauna & hammam",
-      },
-    },
-    {
-      id: "center",
-      label: {
-        ru: "Центр города",
-        uz: "Shahar markazi",
-        en: "City center",
-      },
+      id: "sauna",
+      value: 2,
+      caption: { ru: "сауны", uz: "sauna", en: "saunas" },
+      label: { ru: "2 сауны", uz: "2 sauna", en: "2 saunas" },
     },
   ] as const,
 } as const;

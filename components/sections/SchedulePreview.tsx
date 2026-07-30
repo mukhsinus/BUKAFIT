@@ -1,71 +1,127 @@
-import { getLocale, getTranslations } from "next-intl/server";
+"use client";
+
+import { useMemo, useState } from "react";
+import { LayoutGroup, motion, useReducedMotion } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/lib/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
+import { ScheduleRow } from "@/components/ui/ScheduleRow";
 import {
+  getCurrentClass,
   getScheduleForDay,
-  hallLabels,
   scheduleDisclaimer,
+  weekdays,
+  weekdayLabels,
   type Weekday,
 } from "@/content/schedule";
 import { getTashkentWeekday } from "@/lib/time";
 import type { AppLocale } from "@/lib/i18n/routing";
+import { cn } from "@/lib/utils";
 
-export async function SchedulePreview() {
-  const t = await getTranslations("home.schedule");
-  const locale = (await getLocale()) as AppLocale;
-  const day = getTashkentWeekday() as Weekday;
-  const items = getScheduleForDay(day).slice(0, 6);
+export function SchedulePreview() {
+  const t = useTranslations("home.schedule");
+  const locale = useLocale() as AppLocale;
+  const reduce = useReducedMotion();
+  const [day, setDay] = useState<Weekday>(() => getTashkentWeekday() as Weekday);
+
+  const today = getTashkentWeekday() as Weekday;
+  const current = useMemo(() => getCurrentClass(), []);
+  const items = useMemo(() => getScheduleForDay(day).slice(0, 8), [day]);
 
   return (
-    <section className="border-t border-line section-y">
+    <section id="schedule" className="section-y">
       <div className="container-content">
         <Reveal>
-          <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-            <div>
-              <h2 className="font-display text-display-section uppercase text-smoke">
-                {t("title")}
-              </h2>
-              <p className="mt-1 text-sm text-smoke-muted">{t("description")}</p>
-            </div>
+          <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
+            <h2 className="font-display text-display-section text-ink">
+              {t("title")}
+            </h2>
             <Link
               href="/schedule"
-              className="shrink-0 text-sm font-semibold text-brass hover:text-brass-hover"
+              className="group shrink-0 text-sm font-medium text-pool transition-colors duration-200 hover:text-pool-deep"
             >
               {t("full")}
+              <span
+                className="ms-1 inline-block transition-transform duration-200 [@media(hover:hover)]:group-hover:translate-x-1"
+                aria-hidden
+              >
+                →
+              </span>
             </Link>
           </div>
-        </Reveal>
 
-        {items.length === 0 ? (
-          <p className="text-smoke-muted">{t("empty")}</p>
-        ) : (
-          <div className="overflow-hidden border border-line bg-graphite-elevated">
-            <table className="w-full border-collapse text-sm">
-              <tbody>
-                {items.map((item) => (
-                  <tr
-                    key={item.id}
-                    className="border-b border-line last:border-b-0"
+          <LayoutGroup id="schedule-preview-days">
+            <div
+              className="-mx-1 mb-6 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              role="tablist"
+              aria-label={t("daysAria")}
+            >
+              {weekdays.map((weekday) => {
+                const active = weekday === day;
+                return (
+                  <button
+                    key={weekday}
+                    type="button"
+                    role="tab"
+                    aria-selected={active}
+                    aria-expanded={active}
+                    aria-controls="schedule-preview-panel"
+                    id={`preview-day-${weekday}`}
+                    tabIndex={active ? 0 : -1}
+                    onClick={() => setDay(weekday)}
+                    className={cn(
+                      "relative shrink-0 radius-pill px-4 py-2 font-mono-label transition-colors duration-200",
+                      active ? "text-chalk" : "text-ink/60 hover:text-ink",
+                    )}
                   >
-                    <td className="w-[4.25rem] whitespace-nowrap px-3 py-2.5 font-display text-brass md:w-[5rem] md:px-4">
-                      {item.time}
-                    </td>
-                    <td className="px-1 py-2.5 text-smoke md:px-2">
-                      {item.title[locale]}
-                    </td>
-                    <td className="hidden whitespace-nowrap px-3 py-2.5 text-right text-smoke-muted sm:table-cell md:px-4">
-                      {hallLabels[item.hall][locale]}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+                    {active ? (
+                      reduce ? (
+                        <span className="absolute inset-0 -z-10 radius-pill bg-ink" />
+                      ) : (
+                        <motion.span
+                          layoutId="schedule-preview-day-pill"
+                          className="absolute inset-0 -z-10 radius-pill bg-ink"
+                          transition={{
+                            type: "spring",
+                            stiffness: 380,
+                            damping: 32,
+                          }}
+                        />
+                      )
+                    ) : null}
+                    <span className="relative z-[1]">
+                      {weekdayLabels[weekday][locale]}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </LayoutGroup>
 
-        <p className="mt-3 text-xs text-smoke-muted">
-          {scheduleDisclaimer[locale]}
-        </p>
+          <div
+            id="schedule-preview-panel"
+            role="tabpanel"
+            aria-labelledby={`preview-day-${day}`}
+          >
+            {items.length === 0 ? (
+              <p className="text-ink/70">{t("empty")}</p>
+            ) : (
+              <ul className="border-y border-mineral">
+                {items.map((item) => (
+                  <ScheduleRow
+                    key={item.id}
+                    item={item}
+                    locale={locale}
+                    nowLabel={t("now")}
+                    isNow={day === today && current?.id === item.id}
+                  />
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <p className="mt-4 text-sm text-ink/60">{scheduleDisclaimer[locale]}</p>
+        </Reveal>
       </div>
     </section>
   );

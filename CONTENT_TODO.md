@@ -72,7 +72,10 @@
 
 ## Интеграции (не контент, но блокируют прод)
 
-- [ ] `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID` → `.env`
+- [ ] `TELEGRAM_CHAT_ID` личного/группового чата менеджера → `.env`  
+  Токен бота уже есть (`@bukafituzbot`). Чтобы получить chat_id: откройте бота → `/start` → `node scripts/capture-telegram-chat-id.mjs`.  
+  Для локальной приёмки без chat_id можно поднять `node scripts/telegram-mock-server.mjs` и выставить `TELEGRAM_API_BASE=http://127.0.0.1:4099` + временный `TELEGRAM_CHAT_ID` (см. `.env.example`). Перед продом mock убрать.
 - [ ] Выключить `NEXT_PUBLIC_NOINDEX` после договора (`=false`)
+- [ ] Выключить `NEXT_PUBLIC_ANALYTICS_DEBUG` если включали для QA
 - [ ] ID Яндекс.Метрики / GA4 (`NEXT_PUBLIC_METRICA_ID`, `NEXT_PUBLIC_GA_ID`)
 - [ ] Мерчант Click / Payme — только когда клуб передаст данные

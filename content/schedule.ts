@@ -1,4 +1,9 @@
 import type { LocalizedString } from "@/lib/content-types";
+import {
+  getTashkentMinutes,
+  getTashkentWeekday,
+  parseHmToMinutes,
+} from "@/lib/time";
 
 /** 0 = понедельник … 6 = воскресенье */
 export type Weekday = 0 | 1 | 2 | 3 | 4 | 5 | 6;
@@ -438,4 +443,26 @@ export function getScheduleForDay(day: Weekday): ScheduleItem[] {
   return schedule
     .filter((item) => item.day === day)
     .sort((a, b) => a.time.localeCompare(b.time));
+}
+
+/** Типичная длительность группового занятия (мин) для «сейчас в клубе» */
+export const CLASS_DURATION_MINUTES = 55;
+
+/**
+ * Текущее занятие по content/schedule + Asia/Tashkent.
+ * Если слот не найден — null (тренажёрный зал открыт 24/7).
+ */
+export function getCurrentClass(date: Date = new Date()): ScheduleItem | null {
+  const day = getTashkentWeekday(date) as Weekday;
+  const nowMin = getTashkentMinutes(date);
+  const today = getScheduleForDay(day);
+
+  for (const item of today) {
+    const start = parseHmToMinutes(item.time);
+    if (nowMin >= start && nowMin < start + CLASS_DURATION_MINUTES) {
+      return item;
+    }
+  }
+
+  return null;
 }

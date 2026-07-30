@@ -13,28 +13,31 @@ export async function FaqSection() {
     .filter((item): item is (typeof faq)[number] => Boolean(item));
 
   return (
-    <section className="border-t border-line section-y">
+    <section id="faq" className="section-y">
       <div className="container-content">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14 lg:items-start">
-          <Reveal>
-            <div className="lg:sticky lg:top-24">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-brass">
-                {t("eyebrow")}
-              </p>
-              <h2 className="font-display text-display-section uppercase text-smoke">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-16 lg:items-start">
+          <Reveal className="lg:col-span-5">
+            <div className="lg:sticky lg:top-28">
+              <h2 className="font-display text-display-section text-ink">
                 {t("title")}
               </h2>
-              <p className="mt-3 max-w-sm text-smoke-muted">{t("description")}</p>
+              <p className="mt-4 max-w-sm text-ink/70">{t("description")}</p>
               <Link
                 href="/faq"
-                className="mt-5 inline-flex text-sm font-semibold text-brass hover:text-brass-hover"
+                className="group mt-6 inline-flex text-sm font-medium text-pool transition-colors duration-200 hover:text-pool-deep"
               >
                 {t("all")}
+                <span
+                  className="ms-1 inline-block transition-transform duration-200 [@media(hover:hover)]:group-hover:translate-x-1"
+                  aria-hidden
+                >
+                  →
+                </span>
               </Link>
             </div>
           </Reveal>
 
-          <Reveal delay={0.08}>
+          <Reveal className="lg:col-span-7" delay={0.06}>
             <Accordion>
               {items.map((item) => (
                 <AccordionItem

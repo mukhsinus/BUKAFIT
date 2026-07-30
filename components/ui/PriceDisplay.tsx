@@ -4,55 +4,87 @@ type PriceDisplayProps = {
   amount: number;
   locale: string;
   className?: string;
-  /** Accent color for the amount (default brass). Use graphite on brass surfaces. */
-  tone?: "brass" | "graphite" | "smoke";
+  /** На светлом — ink; на инверсной строке — chalk */
+  tone?: "ink" | "chalk";
   size?: "sm" | "md" | "lg";
+  /** Inline: сумма и «СУМ» на одной базовой линии */
+  layout?: "stack" | "inline";
 };
 
 const sizeClass = {
-  sm: "text-[clamp(1.15rem,3vw,1.35rem)]",
-  md: "text-[clamp(1.25rem,3.2vw,1.65rem)]",
-  lg: "text-[clamp(1.35rem,3.5vw,1.85rem)]",
+  sm: "text-[clamp(1.25rem,3.5vw,1.75rem)]",
+  md: "text-[clamp(1.5rem,4vw,2.25rem)]",
+  /** Потолок 2.75rem: «15 000 000» + СУМ в колонках 8–10 на 1440 */
+  lg: "text-[clamp(1.5rem,3.2vw,2.75rem)]",
 } as const;
 
 const toneClass = {
-  brass: "text-brass",
-  graphite: "text-graphite",
-  smoke: "text-smoke",
+  ink: "text-ink",
+  chalk: "text-chalk",
+} as const;
+
+const currencyTone = {
+  ink: "text-ink/65",
+  chalk: "text-chalk/70",
 } as const;
 
 /**
- * Prices use Manrope + tabular-nums — Unbounded is too wide for UZS amounts
- * like «15 000 000» at 360px / 4-col cards.
+ * Цены — mono/body + tabular-nums, не display-гарнитура
+ * (длинные суммы вроде «15 000 000» на 360px).
  */
 export function PriceDisplay({
   amount,
   locale,
   className,
-  tone = "brass",
+  tone = "ink",
   size = "md",
+  layout = "inline",
 }: PriceDisplayProps) {
   const { amount: formatted, currency } = formatPriceParts(amount, locale);
 
+  if (layout === "stack") {
+    return (
+      <div
+        className={cn(
+          "min-w-0 max-w-full font-mono font-medium tabular-nums tracking-tight",
+          toneClass[tone],
+          className,
+        )}
+      >
+        <span className={cn("block leading-none", sizeClass[size])}>
+          {formatted}
+        </span>
+        <span
+          className={cn(
+            "mt-1.5 block font-mono-label",
+            currencyTone[tone],
+          )}
+        >
+          {currency}
+        </span>
+      </div>
+    );
+  }
+
   return (
-    <div
+    <p
       className={cn(
-        "min-w-0 max-w-full font-sans font-semibold tabular-nums tracking-tight",
+        "inline-flex min-w-0 max-w-full flex-nowrap items-baseline gap-x-2 font-mono font-medium tabular-nums tracking-tight",
         toneClass[tone],
         className,
       )}
     >
       <span
         className={cn(
-          "block w-full truncate leading-none",
+          "whitespace-nowrap leading-none",
           sizeClass[size],
         )}
       >
         {formatted}
       </span>
-      <span className="mt-1.5 block text-[0.6875rem] font-medium uppercase tracking-[0.1em] text-smoke-muted">
+      <span className={cn("shrink-0 font-mono-label", currencyTone[tone])}>
         {currency}
       </span>
-    </div>
+    </p>
   );
 }

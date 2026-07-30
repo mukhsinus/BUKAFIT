@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { MediaImage, type MediaSlot } from "@/components/media/MediaImage";
-import { FinalCta } from "@/components/sections/FinalCta";
+import { TypographicBlock } from "@/components/ui/TypographicBlock";
+import { ServiceHero } from "@/components/sections/ServiceHero";
 import { PricingSection } from "@/components/sections/PricingSection";
+import { FinalCta } from "@/components/sections/FinalCta";
+import { Reveal } from "@/components/motion/Reveal";
 import { getServiceBySlug, serviceSlugs } from "@/content/services";
 import { buildPageMetadata } from "@/lib/seo";
 import type { AppLocale } from "@/lib/i18n/routing";
+import type { MediaSlot } from "@/components/media/MediaImage";
 
 type PageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -42,34 +45,33 @@ export default async function ServicePage({ params }: PageProps) {
 
   return (
     <>
+      <ServiceHero
+        title={service.title[typedLocale]}
+        slot={service.mediaSlot as MediaSlot}
+        placeholderLabel={t("photoLabel", {
+          zone: service.title[typedLocale],
+        })}
+      />
+
       <section className="section-y">
-        <div className="container-content grid gap-8 lg:grid-cols-2">
-          <div>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-brass">
-              {t("eyebrow")}
-            </p>
-            <h1 className="font-display text-display-section uppercase text-smoke">
-              {service.title[typedLocale]}
-            </h1>
-            <p className="mt-4 text-smoke-muted">{service.body[typedLocale]}</p>
-            <div className="mt-8 border border-line bg-graphite-elevated p-5">
-              <h2 className="font-display text-lg uppercase text-brass">
-                {t("forWhom")}
-              </h2>
-              <p className="mt-2 text-sm text-smoke">{service.forWhom[typedLocale]}</p>
-            </div>
-          </div>
-          <div className="relative aspect-[4/3] overflow-hidden border border-line bg-graphite-mid">
-            <MediaImage
-              slot={service.mediaSlot as MediaSlot}
-              alt=""
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="absolute inset-0"
-            />
-          </div>
+        <div className="container-content">
+          <Reveal>
+            <TypographicBlock
+              titleAs="h2"
+              title={t("about")}
+              lead={service.short[typedLocale]}
+            >
+              <p>{service.body[typedLocale]}</p>
+              <div className="border-t border-mineral pt-6">
+                <p className="font-mono-label text-ink/55">{t("forWhom")}</p>
+                <p className="mt-2 text-ink/80">{service.forWhom[typedLocale]}</p>
+              </div>
+            </TypographicBlock>
+          </Reveal>
         </div>
       </section>
-      <PricingSection showAllPlansLink />
+
+      <PricingSection showAllPlansLink title={t("relatedPlans")} />
       <FinalCta />
     </>
   );

@@ -43,7 +43,10 @@ export function trackEvent(
     window.gtag("event", event, payload);
   }
 
-  if (!metricaId && !gaId && process.env.NODE_ENV === "development") {
+  if (
+    (!metricaId && !gaId && process.env.NODE_ENV === "development") ||
+    process.env.NEXT_PUBLIC_ANALYTICS_DEBUG === "true"
+  ) {
     console.info("[analytics]", event, payload);
   }
 }

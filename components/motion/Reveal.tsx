@@ -16,7 +16,7 @@ type RevealProps = {
   asChild?: boolean;
 } & Omit<HTMLMotionProps<"div">, "children">;
 
-const rise = { opacity: 0, y: 24 };
+const rise = { opacity: 0, y: 12 };
 const shown = { opacity: 1, y: 0 };
 
 export function Reveal({
@@ -36,8 +36,8 @@ export function Reveal({
       className={cn(className)}
       initial={rise}
       whileInView={shown}
-      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay }}
       {...rest}
     >
       {children}
@@ -84,9 +84,12 @@ export function Stagger({
 export function StaggerItem({
   children,
   className,
+  /** Строки hero: выезд из-под маски (clip-path + translateY) */
+  mask = false,
 }: {
   children: ReactNode;
   className?: string;
+  mask?: boolean;
 }) {
   const reduce = useReducedMotion();
 
@@ -94,14 +97,35 @@ export function StaggerItem({
     return <div className={className}>{children}</div>;
   }
 
+  if (mask) {
+    return (
+      <span className={cn("block overflow-hidden", className)}>
+        <motion.span
+          className="block"
+          variants={{
+            hidden: { y: "110%", opacity: 0 },
+            show: {
+              y: "0%",
+              opacity: 1,
+              transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+            },
+          }}
+        >
+          {children}
+        </motion.span>
+      </span>
+    );
+  }
+
   return (
     <motion.div
       className={className}
       variants={{
-        hidden: rise,
+        hidden: { opacity: 0, y: 12 },
         show: {
-          ...shown,
-          transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
         },
       }}
     >
