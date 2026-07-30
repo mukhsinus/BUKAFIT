@@ -7,9 +7,9 @@ import {
   useRef,
   useState,
   type CSSProperties,
-  type RefObject,
 } from "react";
 import { useReducedMotion } from "framer-motion";
+import { useLocale } from "next-intl";
 import { club } from "@/content/club";
 import { cn } from "@/lib/utils";
 import type { AppLocale } from "@/lib/i18n/routing";
@@ -18,7 +18,7 @@ import type { AppLocale } from "@/lib/i18n/routing";
 const SPEED_PX_PER_SEC = 40;
 
 type FactsStripProps = {
-  locale: AppLocale;
+  className?: string;
 };
 
 function FactDot({ className }: { className?: string }) {
@@ -36,56 +36,81 @@ function FactDot({ className }: { className?: string }) {
 function FactRun({
   locale,
   ariaHidden,
-  measureRef,
+  copies = 1,
 }: {
   locale: AppLocale;
   ariaHidden?: boolean;
-  measureRef?: RefObject<HTMLDivElement | null>;
+  copies?: number;
 }) {
   return (
     <div
-      ref={measureRef}
-      className="flex shrink-0 items-center gap-7 pr-7"
+      className="flex shrink-0 items-center"
       aria-hidden={ariaHidden || undefined}
     >
-      {club.tickerItems.map((item) => (
-        <Fragment key={item.id}>
-          <span className="font-mono-label whitespace-nowrap text-chalk/85">
-            {item.label[locale]}
-          </span>
-          <FactDot />
-        </Fragment>
+      {Array.from({ length: copies }, (_, copyIndex) => (
+        <div
+          key={copyIndex}
+          className="flex shrink-0 items-center gap-7 pr-7"
+        >
+          {club.tickerItems.map((item) => (
+            <Fragment key={`${copyIndex}-${item.id}`}>
+              <span className="font-mono-label whitespace-nowrap text-chalk/85">
+                {item.label[locale]}
+              </span>
+              <FactDot />
+            </Fragment>
+          ))}
+        </div>
       ))}
     </div>
   );
 }
 
-export function FactsStrip({ locale }: FactsStripProps) {
+export function FactsStrip({ className }: FactsStripProps) {
+  const locale = useLocale() as AppLocale;
   const reduce = useReducedMotion();
-  const groupRef = useRef<HTMLDivElement>(null);
-  const [durationSec, setDurationSec] = useState(30);
+  const viewportRef = useRef<HTMLElement>(null);
+  const unitRef = useRef<HTMLDivElement>(null);
+  const [unitWidth, setUnitWidth] = useState(0);
+  const [viewportWidth, setViewportWidth] = useState(0);
 
   const measure = useCallback(() => {
-    const width = groupRef.current?.offsetWidth ?? 0;
-    if (width <= 0) return;
-    setDurationSec(width / SPEED_PX_PER_SEC);
+    const nextUnit = unitRef.current?.offsetWidth ?? 0;
+    const nextViewport = viewportRef.current?.offsetWidth ?? 0;
+    if (nextUnit > 0) setUnitWidth(nextUnit);
+    if (nextViewport > 0) setViewportWidth(nextViewport);
   }, []);
 
   useEffect(() => {
     if (reduce) return;
     measure();
-    const el = groupRef.current;
-    if (!el || typeof ResizeObserver === "undefined") return;
+    const viewport = viewportRef.current;
+    const unit = unitRef.current;
+    if (typeof ResizeObserver === "undefined") return;
     const ro = new ResizeObserver(() => measure());
-    ro.observe(el);
+    if (viewport) ro.observe(viewport);
+    if (unit) ro.observe(unit);
     return () => ro.disconnect();
   }, [measure, reduce, locale]);
+
+  // Один «полуцикл» всегда шире экрана — иначе между повторами виден пустой зазор.
+  const copiesPerHalf =
+    unitWidth > 0 && viewportWidth > 0
+      ? Math.max(1, Math.ceil(viewportWidth / unitWidth) + 1)
+      : 2;
+  const durationSec =
+    unitWidth > 0
+      ? (unitWidth * copiesPerHalf) / SPEED_PX_PER_SEC
+      : 30;
 
   if (reduce) {
     return (
       <section
         aria-label="Facts"
-        className="flex min-h-14 w-full items-center justify-center bg-ink px-5 py-4 md:min-h-16"
+        className={cn(
+          "flex min-h-14 w-full shrink-0 items-center justify-center bg-ink px-5 py-4 md:min-h-16",
+          className,
+        )}
       >
         <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5">
           {club.tickerItems.map((item, index) => (
@@ -103,9 +128,30 @@ export function FactsStrip({ locale }: FactsStripProps) {
 
   return (
     <section
+      ref={viewportRef}
       aria-label="Facts"
-      className="facts-marquee group/marquee relative flex h-14 w-full items-center overflow-hidden bg-ink md:h-16"
+      className={cn(
+        "facts-marquee group/marquee relative flex h-14 w-full shrink-0 items-center overflow-hidden bg-ink md:h-16",
+        className,
+      )}
     >
+      {/* Скрытый эталон ширины одного прогона (для расчёта копий и длительности) */}
+      <div
+        className="pointer-events-none absolute -z-10 flex opacity-0"
+        aria-hidden
+      >
+        <div ref={unitRef} className="flex shrink-0 items-center gap-7 pr-7">
+          {club.tickerItems.map((item) => (
+            <Fragment key={item.id}>
+              <span className="font-mono-label whitespace-nowrap text-chalk/85">
+                {item.label[locale]}
+              </span>
+              <FactDot />
+            </Fragment>
+          ))}
+        </div>
+      </div>
+
       <div
         className="facts-marquee-track flex w-max will-change-transform"
         style={
@@ -114,8 +160,8 @@ export function FactsStrip({ locale }: FactsStripProps) {
           } as CSSProperties
         }
       >
-        <FactRun locale={locale} measureRef={groupRef} />
-        <FactRun locale={locale} ariaHidden />
+        <FactRun locale={locale} copies={copiesPerHalf} />
+        <FactRun locale={locale} copies={copiesPerHalf} ariaHidden />
       </div>
     </section>
   );

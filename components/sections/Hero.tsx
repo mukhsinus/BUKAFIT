@@ -8,6 +8,7 @@ import {
   Stagger,
   StaggerItem,
 } from "@/components/motion/Reveal";
+import { FactsStrip } from "@/components/sections/FactsStrip";
 import { HeroClock } from "@/components/sections/HeroClock";
 import { NowInClub } from "@/components/sections/NowInClub";
 import { useLead } from "@/components/lead/LeadProvider";
@@ -75,12 +76,14 @@ export function Hero() {
               </StaggerItem>
             </div>
 
-            {/* Тонкая mono-строка — последний элемент внутри hero, без отдельного блока */}
             <StaggerItem className="mt-6 md:mt-7">
               <NowInClub />
             </StaggerItem>
           </Stagger>
         </div>
+
+        {/* Бегущая лента — прижата к низу hero, full-bleed */}
+        <FactsStrip />
       </div>
     </section>
   );

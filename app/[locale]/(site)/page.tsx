@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Hero } from "@/components/sections/Hero";
-import { FactsStrip } from "@/components/sections/FactsStrip";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { SchedulePreview } from "@/components/sections/SchedulePreview";
@@ -34,12 +33,10 @@ export async function generateMetadata({
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const typedLocale = locale as AppLocale;
 
   return (
     <>
       <Hero />
-      <FactsStrip locale={typedLocale} />
       <PricingSection />
       <ServicesGrid />
       <SchedulePreview />
