@@ -80,14 +80,14 @@ export function PricingSection({
         </Reveal>
 
         {/*
-          Subgrid: общие row-track для карточек одного ряда.
-          Карточки — прямые дети грида (span 7 + grid-rows-subgrid).
+          Равные колонки minmax(0,1fr): «Год» не уже соседей.
+          Внутренние пояса — одинаковый grid-template-rows в PriceCard.
         */}
         <div
           className={[
-            "grid grid-cols-1 gap-x-4 gap-y-4 pt-5",
-            "md:grid-cols-2 md:gap-x-5 md:gap-y-5",
-            "xl:grid-cols-4 xl:gap-x-6 xl:gap-y-0 xl:pt-6",
+            "grid grid-cols-1 items-stretch gap-4 pt-5",
+            "md:grid-cols-2 md:gap-5",
+            "xl:grid-cols-4 xl:gap-6 xl:pt-6",
           ].join(" ")}
         >
           {plans.map((plan, index) => (

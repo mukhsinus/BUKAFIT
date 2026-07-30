@@ -7,4 +7,3 @@
 export { Reveal, Stagger, StaggerItem, HeroHeadlineReveal } from "./Reveal";
 export { HeroCursorGlow } from "./HeroCursorGlow";
 export { ScrollProgress } from "./ScrollProgress";
-export { CountUp } from "./CountUp";

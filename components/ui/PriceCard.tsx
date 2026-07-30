@@ -41,7 +41,8 @@ function CheckMark({ className }: { className?: string }) {
 
 /**
  * Карточка тарифа §4.3 / /pricing — премиум-сетка фазы 10.
- * Прямые дети = пояса для CSS subgrid (выравнивание по Y во всех карточках ряда).
+ * Shell = relative + симметричный padding; пояса — внутренний grid
+ * с одинаковым template-rows. Бейдж/градиент absolute вне grid-потока.
  */
 export function PriceCard({
   plan,
@@ -80,10 +81,12 @@ export function PriceCard({
   }, [recommended, reduce]);
 
   const shellClass = cn(
-    /* 7 поясов subgrid: label / title / desc / hairline / price / list / cta */
-    "group relative col-span-1 row-span-7 grid grid-rows-subgrid gap-y-0 overflow-visible",
+    "group relative flex h-full w-full min-w-0 flex-col overflow-visible",
     "rounded-[20px] md:rounded-[24px] xl:rounded-[28px]",
+    /* Симметричный padding со всех сторон */
     "p-8 md:p-10 xl:p-12",
+    /* «Год»: +12px выше; компенсирующий pt, чтобы пояса на той же Y */
+    recommended && "xl:-mt-3 xl:pt-[calc(3rem+12px)]",
     "transition-[transform,box-shadow] duration-[250ms] ease-out",
     recommended
       ? cn(
@@ -101,35 +104,36 @@ export function PriceCard({
     className,
   );
 
-  const body = (
-    <>
-      {/* 1 — mono-метка */}
+  const bands = (
+    <div
+      className={cn(
+        "relative z-[1] grid min-h-0 min-w-0 flex-1",
+        "grid-rows-[auto_auto_minmax(2.75rem,auto)_auto_auto_1fr_auto]",
+      )}
+    >
       <p
         className={cn(
-          "relative z-[1] font-mono-label",
+          "min-w-0 font-mono-label",
           recommended ? "text-chalk/70" : "text-ink/55",
         )}
       >
         {plan.durationLabel[locale]}
       </p>
 
-      {/* 2 — title */}
-      <h3 className="relative z-[1] mt-3 font-display text-display-h3">
+      <h3 className="mt-3 min-w-0 font-display text-display-h3">
         {plan.name[locale]}
       </h3>
 
-      {/* 3 — описание: до 2 строк полностью, без ellipsis; общая min-height */}
       <p
         className={cn(
-          "relative z-[1] mt-2 min-h-[calc(2*1.375em)] text-[0.9375rem] leading-snug",
+          "mt-2 min-h-[calc(2*1.375em)] min-w-0 text-[0.9375rem] leading-snug",
           recommended ? "text-chalk/65" : "text-ink/65",
         )}
       >
         {plan.forWhom[locale]}
       </p>
 
-      {/* 4 — hairline */}
-      <div className="relative z-[1] my-6" aria-hidden>
+      <div className="my-6 min-w-0" aria-hidden>
         <div
           className={cn(
             "h-px w-full",
@@ -138,24 +142,22 @@ export function PriceCard({
         />
       </div>
 
-      {/* 5 — цена */}
-      <div className="relative z-[1]">
+      <div className="min-w-0">
         <PriceDisplay
           amount={plan.price}
           locale={locale}
           tone={tone}
-          size="lg"
+          size="card"
           layout="inline"
         />
       </div>
 
-      {/* 6 — список */}
-      <ul className="relative z-[1] mt-6 flex flex-col gap-3">
+      <ul className="mt-6 flex min-w-0 flex-col gap-3">
         {plan.includes.map((item) => (
           <li
             key={item.ru}
             className={cn(
-              "flex items-start gap-2.5 text-[0.875rem] leading-snug",
+              "flex min-w-0 items-start gap-2.5 text-[0.875rem] leading-snug",
               recommended ? "text-chalk/85" : "text-ink/80",
             )}
           >
@@ -165,13 +167,12 @@ export function PriceCard({
                 recommended ? "text-chalk" : "text-pool",
               )}
             />
-            <span>{item[locale]}</span>
+            <span className="min-w-0">{item[locale]}</span>
           </li>
         ))}
       </ul>
 
-      {/* 7 — CTA */}
-      <div className="relative z-[1] mt-8 flex items-end">
+      <div className="mt-8 flex min-w-0 items-end">
         <button
           type="button"
           className={cn(
@@ -189,23 +190,24 @@ export function PriceCard({
           {t("select")}
         </button>
       </div>
+    </div>
+  );
 
-      {/* Декор после поясов: row 1/-1, не создаёт лишних треков */}
+  const body = (
+    <>
       {recommended ? (
         <>
           <div
             className={cn(
-              "pointer-events-none absolute inset-0 z-0 row-span-full row-start-1 rounded-[inherit]",
+              "gradient-pool gradient-pool-layer motion-safe:animate-gradient-drift pointer-events-none absolute inset-0 rounded-[inherit]",
               "transition-opacity duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
               gradientIn ? "opacity-100 delay-150" : "opacity-0",
             )}
             aria-hidden
-          >
-            <div className="gradient-pool gradient-pool-layer motion-safe:animate-gradient-drift absolute inset-0 rounded-[inherit]" />
-          </div>
+          />
           <span
             className={cn(
-              "radius-pill absolute left-1/2 top-[-14px] z-[2] row-start-1 -translate-x-1/2",
+              "radius-pill absolute left-1/2 top-[-14px] z-[2] -translate-x-1/2",
               "bg-chalk px-3 py-1 font-mono-label whitespace-nowrap text-ink",
               "shadow-[0_2px_8px_rgba(16,20,24,0.08)]",
             )}
@@ -214,6 +216,7 @@ export function PriceCard({
           </span>
         </>
       ) : null}
+      {bands}
     </>
   );
 

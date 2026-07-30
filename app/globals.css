@@ -23,7 +23,6 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
 
-  --container-content: 90rem; /* 1440px */
   --radius-pill: 999px;
 }
 
@@ -57,17 +56,12 @@
 }
 
 @layer utilities {
+  /* Fluid: на всю ширину viewport, без потолка 1440px */
   .container-content {
     width: 100%;
-    max-width: var(--container-content);
+    max-width: none;
     margin-inline: auto;
-    padding-inline: 20px;
-  }
-
-  @media (min-width: 1024px) {
-    .container-content {
-      padding-inline: 64px;
-    }
+    padding-inline: clamp(1.25rem, 4vw, 5rem);
   }
 
   /* Отбивка секций: 96px mobile / 128px desktop — не больше */
@@ -253,6 +247,52 @@
   }
 }
 
+/* Фаза 11 — бегущая лента фактов под hero */
+@keyframes facts-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.facts-marquee {
+  isolation: isolate;
+}
+
+/* Мягкие края в ink — текст уходит в полосу, фон не просвечивает */
+.facts-marquee::before,
+.facts-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 2.5rem;
+  pointer-events: none;
+}
+
+.facts-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-ink), transparent);
+}
+
+.facts-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-ink), transparent);
+}
+
+.facts-marquee-track {
+  animation: facts-marquee var(--facts-marquee-duration, 30s) linear infinite;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .group\/marquee:hover .facts-marquee-track {
+    animation-play-state: paused;
+  }
+}
+
 @keyframes ken-burns {
   0% {
     transform: scale(1);
@@ -340,7 +380,8 @@
   .motion-safe\:animate-gradient-drift,
   .motion-safe\:animate-badge-pulse,
   .motion-safe\:animate-pin-bounce,
-  .motion-safe\:animate-faq-plus {
+  .motion-safe\:animate-faq-plus,
+  .facts-marquee-track {
     animation: none !important;
   }
 

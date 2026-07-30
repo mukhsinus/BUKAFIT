@@ -186,7 +186,7 @@ export function Gallery() {
         <ul
           ref={scrollerRef}
           className={cn(
-            "flex snap-x snap-mandatory gap-3 overflow-x-auto px-[max(1.25rem,calc((100vw-90rem)/2+1.25rem))] pb-2 lg:px-[max(4rem,calc((100vw-90rem)/2+4rem))]",
+            "flex snap-x snap-mandatory gap-3 overflow-x-auto px-[clamp(1.25rem,4vw,5rem)] pb-2",
             "cursor-grab active:cursor-grabbing",
             "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
           )}

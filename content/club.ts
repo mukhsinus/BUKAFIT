@@ -83,6 +83,41 @@ export const club = {
       label: { ru: "2 сауны", uz: "2 sauna", en: "2 saunas" },
     },
   ] as const,
+  /** Бегущая лента под hero (фаза 11) — единственное место этих формулировок на главной. */
+  tickerItems: [
+    {
+      id: "area",
+      label: { ru: "2000 М²", uz: "2000 M²", en: "2000 M²" },
+    },
+    {
+      id: "hours",
+      label: { ru: "24/7", uz: "24/7", en: "24/7" },
+    },
+    {
+      id: "pool",
+      label: {
+        ru: "БАССЕЙН 16 М",
+        uz: "BASSEYIN 16 M",
+        en: "POOL 16 M",
+      },
+    },
+    {
+      id: "spa",
+      label: {
+        ru: "САУНА И ХАММАМ",
+        uz: "SAUNA VA HAMMAM",
+        en: "SAUNA & HAMMAM",
+      },
+    },
+    {
+      id: "location",
+      label: {
+        ru: "ЦЕНТР ГОРОДА",
+        uz: "SHAHAR MARKAZI",
+        en: "CITY CENTER",
+      },
+    },
+  ] as const,
 } as const;
 
 export type Club = typeof club;

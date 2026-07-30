@@ -6,7 +6,7 @@ type PriceDisplayProps = {
   className?: string;
   /** На светлом — ink; на инверсной строке — chalk */
   tone?: "ink" | "chalk";
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "card";
   /** Inline: сумма и «СУМ» на одной базовой линии */
   layout?: "stack" | "inline";
 };
@@ -14,8 +14,10 @@ type PriceDisplayProps = {
 const sizeClass = {
   sm: "text-[clamp(1.25rem,3.5vw,1.75rem)]",
   md: "text-[clamp(1.5rem,4vw,2.25rem)]",
-  /** Потолок 2.75rem: «15 000 000» + СУМ в колонках 8–10 на 1440 */
+  /** Строка прайса (полная ширина) */
   lg: "text-[clamp(1.5rem,3.2vw,2.75rem)]",
+  /** Карточка в сетке 4×: «15 000 000» + СУМ в ~214px контента */
+  card: "text-[clamp(1.25rem,2.2vw,1.75rem)]",
 } as const;
 
 const toneClass = {

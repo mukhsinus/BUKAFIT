@@ -24,10 +24,37 @@ async function withPage(width, height, fn) {
   await browser.close();
 }
 
+/** Полный hero viewport — полоса «Сейчас в клубе» внизу */
+await withPage(1440, 900, async (page) => {
+  await page.waitForTimeout(800);
+  await page.screenshot({ path: `${outDir}/04-hero-1440.png`, fullPage: false });
+  console.log("wrote 04-hero-1440.png");
+});
+
+/** Весь ряд карточек на 1440 */
 await withPage(1440, 1100, async (page) => {
   const section = page.locator("#pricing");
   await section.scrollIntoViewIfNeeded();
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(1200);
+
+  const widths = await page.locator("#pricing article").evaluateAll((els) =>
+    els.map((el) => Math.round(el.getBoundingClientRect().width)),
+  );
+  console.log("card widths:", widths);
+
+  const paddings = await page.locator("#pricing article").evaluateAll((els) =>
+    els.map((el) => {
+      const s = getComputedStyle(el);
+      return {
+        pl: s.paddingLeft,
+        pr: s.paddingRight,
+        pt: s.paddingTop,
+        pb: s.paddingBottom,
+      };
+    }),
+  );
+  console.log("card paddings:", JSON.stringify(paddings));
+
   await section.screenshot({ path: `${outDir}/01-grid-1440.png` });
   console.log("wrote 01-grid-1440.png");
 });
