@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/lib/i18n/navigation";
 import { club } from "@/content/club";
 import { FEATURES } from "@/content/features";
@@ -9,6 +9,7 @@ import { LocaleSwitcher } from "@/components/layout/LocaleSwitcher";
 import { useLead } from "@/components/lead/LeadProvider";
 import { getRecommendedPlan } from "@/content/plans";
 import { bindFocusTrap, getFocusableElements } from "@/lib/focus";
+import type { AppLocale } from "@/lib/i18n/routing";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -24,6 +25,7 @@ const navItems = [
 export function Header() {
   const t = useTranslations("nav");
   const tCta = useTranslations("cta");
+  const locale = useLocale() as AppLocale;
   const { openLead } = useLead();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -123,11 +125,8 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2 md:gap-3">
-          <LocaleSwitcher
-            tone={tone}
-            className="hidden md:inline-flex"
-          />
+        <div className="flex items-center gap-1.5 md:gap-3">
+          <LocaleSwitcher tone={tone} />
           <button
             type="button"
             className="btn-pool hidden min-h-10 items-center rounded-none px-4 text-sm font-medium md:inline-flex"
@@ -151,9 +150,10 @@ export function Header() {
             <span aria-hidden className="flex w-6 flex-col gap-[5px]">
               <span
                 className={cn(
-                  "block h-px w-full bg-current transition-transform duration-200",
+                  "block h-px w-full bg-current transition-transform duration-300",
                   open && "translate-y-[6px] rotate-45",
                 )}
+                style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
               />
               <span
                 className={cn(
@@ -163,44 +163,99 @@ export function Header() {
               />
               <span
                 className={cn(
-                  "block h-px w-full bg-current transition-transform duration-200",
+                  "block h-px w-full bg-current transition-transform duration-300",
                   open && "-translate-y-[6px] -rotate-45",
                 )}
+                style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
               />
             </span>
           </button>
         </div>
       </div>
 
-      {/* Fullscreen ink panel — mobile */}
+      {/* Fullscreen mobile menu — pool atmosphere, numbered nav, single footer */}
       <div
         id="mobile-nav"
         role="dialog"
         aria-modal={open ? true : undefined}
         aria-label={t("openMenu")}
+        aria-hidden={open ? undefined : true}
+        data-open={open ? "true" : "false"}
+        inert={open ? undefined : true}
         className={cn(
-          "fixed inset-0 z-[55] bg-ink lg:hidden",
-          open ? "block" : "hidden",
+          "mobile-nav fixed inset-0 z-[55] lg:hidden",
+          open ? "pointer-events-auto" : "pointer-events-none",
         )}
       >
-        <div className="flex h-full flex-col px-5 pb-[max(2rem,env(safe-area-inset-bottom))] pt-20">
-          <nav className="flex flex-1 flex-col justify-center gap-2" aria-label="Mobile">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="font-display text-[clamp(2rem,9vw,3.25rem)] leading-[1.05] tracking-[-0.03em] text-chalk"
-                onClick={() => setOpen(false)}
-              >
-                {t(item.key)}
-              </Link>
-            ))}
+        <div
+          className={cn(
+            "absolute inset-0 bg-ink transition-opacity duration-300",
+            open ? "opacity-100" : "opacity-0",
+          )}
+          style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
+          aria-hidden
+        >
+          <div className="gradient-pool motion-safe:animate-gradient-drift absolute inset-0" />
+          <div
+            className="pointer-events-none absolute -left-[20%] top-[12%] h-[55vmin] w-[55vmin] rounded-full opacity-50 blur-3xl"
+            style={{
+              background:
+                "radial-gradient(circle, color-mix(in srgb, var(--color-pool) 45%, transparent) 0%, transparent 70%)",
+            }}
+          />
+          <div
+            className="pointer-events-none absolute -right-[15%] bottom-[18%] h-[48vmin] w-[48vmin] rounded-full opacity-40 blur-3xl"
+            style={{
+              background:
+                "radial-gradient(circle, color-mix(in srgb, var(--color-pool-deep) 40%, transparent) 0%, transparent 72%)",
+            }}
+          />
+        </div>
+
+        <div className="relative flex h-full flex-col px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-[4.75rem]">
+          <nav
+            className="flex flex-1 flex-col justify-center"
+            aria-label="Mobile"
+          >
+            <ul className="border-t border-chalk/12">
+              {navItems.map((item, index) => (
+                <li key={item.href} className="border-b border-chalk/12">
+                  <Link
+                    href={item.href}
+                    className="mobile-nav-link group flex min-h-[3.75rem] items-baseline gap-4 py-4"
+                    style={{ transitionDelay: open ? `${60 + index * 45}ms` : "0ms" }}
+                    onClick={() => setOpen(false)}
+                  >
+                    <span className="font-mono-label w-6 shrink-0 text-chalk/40 transition-colors duration-200 group-hover:text-pool">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="font-display text-[clamp(1.85rem,8.5vw,2.75rem)] leading-[1.05] tracking-[-0.03em] text-chalk transition-colors duration-200 group-hover:text-steam">
+                      {t(item.key)}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </nav>
-          <div className="mt-auto flex flex-col gap-5 border-t border-[rgba(244,245,243,0.14)] pt-6">
-            <LocaleSwitcher tone="on-dark" />
+
+          <div
+            className="mobile-nav-footer mt-auto flex flex-col gap-5 pt-6"
+            style={{ transitionDelay: open ? `${80 + navItems.length * 45}ms` : "0ms" }}
+          >
+            <div className="flex flex-col gap-1.5">
+              <p className="font-mono-label text-chalk/45">
+                {club.address.full[locale]}
+              </p>
+              <a
+                href={club.phone.telHref}
+                className="font-mono-label text-chalk/70 transition-colors duration-200 hover:text-chalk"
+              >
+                {club.phone.display}
+              </a>
+            </div>
             <button
               type="button"
-              className="btn-pool inline-flex min-h-12 items-center justify-center rounded-none px-4 text-sm font-medium"
+              className="btn-pool inline-flex min-h-12 w-full items-center justify-center rounded-none px-4 text-sm font-medium"
               onClick={openForm}
             >
               {tCta("choosePlan")}

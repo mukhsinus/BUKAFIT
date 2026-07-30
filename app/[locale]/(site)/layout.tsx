@@ -14,7 +14,7 @@ type SiteLayoutProps = {
 export default function SiteLayout({ children }: SiteLayoutProps) {
   return (
     <LeadProvider>
-      <div className="flex min-h-dvh flex-col pb-[calc(4.25rem+env(safe-area-inset-bottom))] md:pb-0">
+      <div className="flex min-h-dvh flex-col pb-[var(--sticky-cta-offset)]">
         <ScrollProgress />
         <Header />
         <HeaderSpacer />

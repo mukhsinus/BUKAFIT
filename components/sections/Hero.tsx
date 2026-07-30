@@ -23,12 +23,12 @@ export function Hero() {
   const recommended = getRecommendedPlan();
 
   return (
-    <section className="relative flex h-[100svh] min-h-[100svh] flex-col overflow-hidden bg-ink">
+    <section className="relative flex h-[calc(100svh-var(--sticky-cta-offset))] min-h-[calc(100svh-var(--sticky-cta-offset))] flex-col overflow-hidden bg-ink md:h-[100svh] md:min-h-[100svh]">
       <HeroMedia mode="image" alt={club.name} src="/media/placeholders/hero.svg" />
       <HeroCursorGlow />
 
       <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
-        <div className="container-content flex flex-1 flex-col pt-[max(5.5rem,env(safe-area-inset-top))] pb-4 md:pb-5">
+        <div className="container-content flex flex-1 flex-col pt-[max(5.5rem,env(safe-area-inset-top))] pb-3 md:pb-5">
           <Stagger className="flex flex-1 flex-col" stagger={0.08}>
             <StaggerItem>
               <HeroClock />
@@ -76,13 +76,13 @@ export function Hero() {
               </StaggerItem>
             </div>
 
-            <StaggerItem className="mt-6 md:mt-7">
+            <StaggerItem className="mt-5 md:mt-7">
               <NowInClub />
             </StaggerItem>
           </Stagger>
         </div>
 
-        {/* Бегущая лента — прижата к низу hero, full-bleed */}
+        {/* Бегущая лента — нижний край hero, над sticky CTA на mobile */}
         <FactsStrip />
       </div>
     </section>
