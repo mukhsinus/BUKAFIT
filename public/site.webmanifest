@@ -1,0 +1,22 @@
+{
+  "name": "Buka FIT",
+  "short_name": "Buka FIT",
+  "description": "Fitness 24/7 in central Tashkent",
+  "start_url": "/ru",
+  "display": "standalone",
+  "background_color": "#1A1816",
+  "theme_color": "#1A1816",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-icon",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

@@ -4,6 +4,8 @@ import { PricingSection } from "@/components/sections/PricingSection";
 import { HowToBuy } from "@/components/sections/HowToBuy";
 import { FaqFull } from "@/components/sections/FaqFull";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { buildPageMetadata } from "@/lib/seo";
+import type { AppLocale } from "@/lib/i18n/routing";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -12,7 +14,12 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.pricing" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return buildPageMetadata({
+    locale: locale as AppLocale,
+    path: "/pricing",
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+  });
 }
 
 export default async function PricingPage({ params }: PageProps) {

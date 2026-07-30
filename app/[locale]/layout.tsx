@@ -4,8 +4,10 @@ import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { Manrope, Unbounded } from "next/font/google";
-import { routing } from "@/lib/i18n/routing";
-import { isNoIndex, siteOrigin } from "@/lib/seo";
+import { AnalyticsScripts } from "@/components/analytics/AnalyticsScripts";
+import { ClubJsonLd } from "@/components/seo/ClubJsonLd";
+import { routing, type AppLocale } from "@/lib/i18n/routing";
+import { buildPageMetadata, isNoIndex, siteOrigin } from "@/lib/seo";
 import "../globals.css";
 
 const manrope = Manrope({
@@ -37,27 +39,35 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  const origin = siteOrigin();
-  const noindex = isNoIndex();
+  const typedLocale = locale as AppLocale;
+  const page = buildPageMetadata({
+    locale: typedLocale,
+    path: "/",
+    title: t("defaultTitle"),
+    description: t("defaultDescription"),
+  });
 
   return {
-    metadataBase: new URL(origin),
+    metadataBase: new URL(siteOrigin()),
     title: {
       default: t("defaultTitle"),
       template: `%s · ${t("siteName")}`,
     },
     description: t("defaultDescription"),
-    alternates: {
-      languages: {
-        ru: `${origin}/ru`,
-        uz: `${origin}/uz`,
-        en: `${origin}/en`,
-        "x-default": `${origin}/ru`,
-      },
-    },
-    robots: noindex
+    alternates: page.alternates,
+    openGraph: page.openGraph,
+    twitter: page.twitter,
+    robots: isNoIndex()
       ? { index: false, follow: false }
       : { index: true, follow: true },
+    icons: {
+      icon: [
+        { url: "/icon", type: "image/png" },
+        { url: "/icon.svg", type: "image/svg+xml" },
+      ],
+      apple: [{ url: "/apple-icon", sizes: "180x180", type: "image/png" }],
+    },
+    manifest: "/site.webmanifest",
   };
 }
 
@@ -73,6 +83,7 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
   const messages = await getMessages();
+  const typedLocale = locale as AppLocale;
 
   return (
     <html
@@ -81,6 +92,8 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body>
+        <ClubJsonLd locale={typedLocale} />
+        <AnalyticsScripts />
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>

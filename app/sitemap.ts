@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { FEATURES } from "@/content/features";
 import { serviceSlugs } from "@/content/services";
 import { routing } from "@/lib/i18n/routing";
 import { isNoIndex, siteOrigin } from "@/lib/seo";
@@ -8,12 +9,12 @@ const staticPaths = [
   "/pricing",
   "/schedule",
   "/services",
-  "/trainers",
   "/about",
   "/contacts",
   "/faq",
   "/legal/privacy",
   "/legal/offer",
+  ...(FEATURES.trainers ? ["/trainers"] : []),
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

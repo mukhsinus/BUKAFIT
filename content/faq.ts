@@ -142,6 +142,20 @@ export const faq: FaqItem[] = [
     },
   },
   {
+    id: "refund",
+    category: "payment",
+    question: {
+      ru: "Можно ли вернуть деньги за абонемент?",
+      uz: "Abonement pulini qaytarish mumkinmi?",
+      en: "Can I get a membership refund?",
+    },
+    answer: {
+      ru: "Правила возврата и перерасчёта подтверждает клуб. Оставьте заявку — менеджер разберёт ваш случай по актуальным условиям.",
+      uz: "Qaytarish va qayta hisoblash qoidalarini klub tasdiqlaydi. Ariza qoldiring — menejer holatingizni dolzarb shartlar bo‘yicha ko‘rib chiqadi.",
+      en: "Refund and recalculation rules are set by the club. Leave a request — a manager will review your case under the current policy.",
+    },
+  },
+  {
     id: "kids-swim",
     category: "kids",
     question: {

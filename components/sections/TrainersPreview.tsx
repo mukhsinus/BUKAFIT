@@ -1,6 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/lib/i18n/navigation";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { FEATURES } from "@/content/features";
 import { trainers } from "@/content/trainers";
 import type { AppLocale } from "@/lib/i18n/routing";
 
@@ -11,6 +12,10 @@ type TrainersPreviewProps = {
 export async function TrainersPreview({
   showAllLink = true,
 }: TrainersPreviewProps) {
+  if (!FEATURES.trainers || trainers.length === 0) {
+    return null;
+  }
+
   const t = await getTranslations("home.trainers");
   const locale = (await getLocale()) as AppLocale;
 

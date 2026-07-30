@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/lib/i18n/navigation";
+import { buildPageMetadata } from "@/lib/seo";
+import type { AppLocale } from "@/lib/i18n/routing";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -9,7 +11,12 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.legal" });
-  return { title: t("offerTitle"), description: t("offerDescription") };
+  return buildPageMetadata({
+    locale: locale as AppLocale,
+    path: "/legal/offer",
+    title: t("offerTitle"),
+    description: t("offerDescription"),
+  });
 }
 
 export default async function OfferPage({ params }: PageProps) {

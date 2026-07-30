@@ -1,13 +1,16 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/lib/i18n/navigation";
 import { club } from "@/content/club";
+import { FEATURES } from "@/content/features";
 import type { AppLocale } from "@/lib/i18n/routing";
 
 const footerNav = [
   { href: "/pricing" as const, key: "pricing" as const },
   { href: "/schedule" as const, key: "schedule" as const },
   { href: "/services" as const, key: "services" as const },
-  { href: "/trainers" as const, key: "trainers" as const },
+  ...(FEATURES.trainers
+    ? [{ href: "/trainers" as const, key: "trainers" as const }]
+    : []),
   { href: "/about" as const, key: "about" as const },
   { href: "/faq" as const, key: "faq" as const },
   { href: "/contacts" as const, key: "contacts" as const },

@@ -3,6 +3,7 @@ import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 import { Gallery } from "@/components/sections/Gallery";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { club } from "@/content/club";
+import { buildPageMetadata } from "@/lib/seo";
 import type { AppLocale } from "@/lib/i18n/routing";
 
 type PageProps = { params: Promise<{ locale: string }> };
@@ -12,7 +13,12 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.about" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return buildPageMetadata({
+    locale: locale as AppLocale,
+    path: "/about",
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+  });
 }
 
 export default async function AboutPage({ params }: PageProps) {

@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { getServiceBySlug, serviceSlugs } from "@/content/services";
+import { buildPageMetadata } from "@/lib/seo";
 import type { AppLocale } from "@/lib/i18n/routing";
 
 type PageProps = {
@@ -21,10 +22,12 @@ export async function generateMetadata({
   const service = getServiceBySlug(slug);
   if (!service) return {};
   const typedLocale = locale as AppLocale;
-  return {
+  return buildPageMetadata({
+    locale: typedLocale,
+    path: `/services/${slug}`,
     title: service.title[typedLocale],
     description: service.short[typedLocale],
-  };
+  });
 }
 
 export default async function ServicePage({ params }: PageProps) {
