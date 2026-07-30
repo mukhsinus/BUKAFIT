@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme {
+  --color-graphite: #1a1816;
+  --color-graphite-elevated: #24211e;
+  --color-smoke: #e8e4df;
+  --color-smoke-muted: #a39e97;
+  --color-brass: #c4a46a;
+  --color-brass-hover: #d4b87e;
+  --color-water: #6b8fa3;
+  --color-line: #3a3530;
+  --color-danger: #c45c4a;
+  --color-success: #7a9e7e;
+
+  --font-display: var(--font-unbounded), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+
+  --container-content: 72rem;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-graphite text-smoke font-sans antialiased;
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+    line-height: 1.55;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brass);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-brass) 40%, transparent);
+    color: var(--color-smoke);
+  }
+}
+
+@layer utilities {
+  .container-content {
+    width: 100%;
+    max-width: var(--container-content);
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 2rem);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    text-wrap: balance;
+    hyphens: none;
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+
+  .text-display-hero {
+    font-size: clamp(2rem, 7vw, 5.5rem);
+  }
+
+  .text-display-section {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+  }
+
+  .text-display-price {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+
+  .btn-brass {
+    @apply bg-brass text-graphite hover:bg-brass-hover;
+  }
+}
+
+@keyframes open-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+
+@keyframes ken-burns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.06);
+  }
+}
+
+@utility animate-open-pulse {
+  animation: open-pulse 1.8s ease-out infinite;
+}
+
+@utility animate-ken-burns {
+  animation: ken-burns 18s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-safe\:animate-open-pulse,
+  .motion-safe\:animate-ken-burns {
+    animation: none !important;
+  }
+}

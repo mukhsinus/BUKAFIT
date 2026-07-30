@@ -1,0 +1,210 @@
+{
+  "meta": {
+    "siteName": "Buka FIT",
+    "defaultTitle": "Buka FIT — 24/7 fitness in central Tashkent",
+    "defaultDescription": "A 2000 m² fitness space on Mirabad: gym, pool, sauna and hammam. Open around the clock."
+  },
+  "nav": {
+    "pricing": "Memberships",
+    "schedule": "Schedule",
+    "services": "Services",
+    "trainers": "Trainers",
+    "contacts": "Contacts",
+    "about": "About",
+    "faq": "FAQ",
+    "home": "Home",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "cta": {
+    "choosePlan": "Choose a plan",
+    "leaveRequest": "Leave a request",
+    "writeTelegram": "Message on Telegram",
+    "call": "Call",
+    "memberships": "Memberships",
+    "signUp": "Sign up"
+  },
+  "openNow": {
+    "label": "Open now",
+    "aria": "Club is open now, Tashkent local time {time}"
+  },
+  "locale": {
+    "label": "Language",
+    "ru": "RU",
+    "uz": "UZ",
+    "en": "EN"
+  },
+  "footer": {
+    "tagline": "A 2000 m² fitness space. Never closed.",
+    "hours": "Open 24/7",
+    "legal": "Legal",
+    "privacy": "Privacy policy",
+    "offer": "Public offer",
+    "social": "Social",
+    "address": "Address",
+    "rights": "Buka FIT. Tashkent."
+  },
+  "lead": {
+    "title": "Leave a request",
+    "name": "Name",
+    "phone": "Phone",
+    "selectedPlan": "Plan",
+    "noPlan": "Not selected yet",
+    "submitting": "Sending…",
+    "successTitle": "Request sent",
+    "successBody": "A manager will contact you within 15 minutes.",
+    "writeTelegramNow": "Message on Telegram now",
+    "close": "Close",
+    "errorTitle": "Couldn’t send",
+    "errorBody": "Call or message us on Telegram — a manager is available 24/7.",
+    "errors": {
+      "name": "Enter a name (at least 2 characters)",
+      "phone": "Use the format +998 XX XXX XX XX"
+    }
+  },
+  "home": {
+    "hero": {
+      "headline": "Your gym never closes",
+      "subtitle": "2000 m² in central Tashkent · pool · sauna & hammam · 24/7"
+    },
+    "pricing": {
+      "eyebrow": "Memberships",
+      "title": "Pick a term",
+      "description": "Prices are on the site. Leave a request — a manager confirms and completes signup.",
+      "badge": "Best value",
+      "allPlans": "Full details"
+    },
+    "services": {
+      "eyebrow": "The space",
+      "title": "What’s inside",
+      "description": "Floor, water, heat and personal coaching — one territory.",
+      "all": "All services"
+    },
+    "schedule": {
+      "eyebrow": "Group classes",
+      "title": "Today at the club",
+      "description": "A short day preview. Full grid on the schedule page.",
+      "full": "Full schedule",
+      "empty": "No draft classes for today — check the full schedule."
+    },
+    "trainers": {
+      "eyebrow": "Team",
+      "title": "Trainers",
+      "description": "Cards are ready. Names and photos land once the club provides them.",
+      "all": "All trainers",
+      "experience": "{years} years experience",
+      "experienceTodo": "Experience — to be confirmed"
+    },
+    "gallery": {
+      "eyebrow": "Atmosphere",
+      "title": "Gallery",
+      "description": "Zone placeholders for now. Real photos drop into the same slots.",
+      "slots": {
+        "gym": "Gym floor",
+        "pool": "Pool",
+        "group": "Group studio",
+        "spa": "Sauna & hammam",
+        "massage": "Massage",
+        "cafe": "Café"
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "title": "Common questions",
+      "description": "Hours, what’s included, and how payment works — briefly.",
+      "all": "All questions"
+    },
+    "contacts": {
+      "eyebrow": "Contacts",
+      "title": "Find us",
+      "description": "Central Tashkent. Open around the clock.",
+      "address": "Address",
+      "hours": "Hours",
+      "open247": "Open 24/7",
+      "phone": "Phone",
+      "social": "Social",
+      "openGoogle": "Open in Google Maps",
+      "open2gis": "Open in 2GIS",
+      "mapTitle": "Buka FIT map",
+      "mapPlaceholder": "Mirabad, 41/6",
+      "loadMap": "Show map"
+    },
+    "finalCta": {
+      "title": "Ready to start?",
+      "description": "Two fields — and a manager is on it. Or message us on Telegram now."
+    }
+  },
+  "phase": {
+    "stubTitle": "Section in progress",
+    "stubBody": "Page content ships in the next phase. Navigation, locales and the content layer are already wired."
+  },
+  "pages": {
+    "pricing": {
+      "metaTitle": "Memberships & pricing",
+      "metaDescription": "Month, 6 months, year and VIP at Buka FIT. Prices on the site — leave a request in two steps.",
+      "howToBuy": {
+        "title": "How to buy",
+        "description": "Three short steps — no hidden pricing.",
+        "step1Title": "Pick a plan",
+        "step1Body": "Compare duration and inclusions on this page.",
+        "step2Title": "Leave a request",
+        "step2Body": "Name and phone — a manager confirms the details.",
+        "step3Title": "Complete at the club",
+        "step3Body": "Payment and access follow after the manager call."
+      }
+    },
+    "schedule": {
+      "metaTitle": "Group class schedule",
+      "metaDescription": "Buka FIT group classes by weekday. Check Telegram for the live grid.",
+      "eyebrow": "Group classes",
+      "title": "Schedule",
+      "description": "A draft grid for orientation. Live schedule — Telegram @bukafit24.",
+      "daysAria": "Weekdays",
+      "filtersAria": "Directions",
+      "allDirections": "All",
+      "empty": "No classes in the draft for this day."
+    },
+    "services": {
+      "metaTitle": "Club services",
+      "metaDescription": "Gym floor, pool, group classes, SPA, massage, kids format and personal training."
+    },
+    "service": {
+      "eyebrow": "Service",
+      "forWhom": "Who it’s for"
+    },
+    "trainers": {
+      "metaTitle": "Trainers",
+      "metaDescription": "The Buka FIT team. Names and photos arrive once the club provides them."
+    },
+    "contacts": {
+      "metaTitle": "Contacts",
+      "metaDescription": "Buka FIT address on Mirabad, phone, Telegram and map."
+    },
+    "about": {
+      "metaTitle": "About the club",
+      "metaDescription": "Buka FIT — 2000 m² of 24/7 fitness in central Tashkent.",
+      "eyebrow": "Club",
+      "title": "About Buka FIT",
+      "body": "Buka FIT is a 2000 m² fitness territory in central Tashkent. Open around the clock: gym floor, pool, sauna and hammam in the locker rooms, group classes and personal coaching — on one site."
+    },
+    "faq": {
+      "metaTitle": "FAQ",
+      "metaDescription": "Answers on memberships, visits, pool, payment and kids format.",
+      "title": "Questions & answers",
+      "description": "Short and direct. Edge-case terms are confirmed with a manager."
+    },
+    "legal": {
+      "privacyTitle": "Privacy policy",
+      "privacyDescription": "How Buka FIT handles personal data from requests.",
+      "privacyIntro": "By submitting a request you share your name and phone so we can contact you about memberships and club services.",
+      "privacyData": "Data is used only to process your inquiry and is not sold to third parties. Retention and deletion — on request via club contacts.",
+      "privacyContact": "For data questions, message the club on Telegram or call the phone listed on the site.",
+      "offerTitle": "Public offer",
+      "offerDescription": "Buka FIT service terms (template until legal details arrive).",
+      "offerIntro": "This document is a public-offer template. Full legal entity details will be added once the club provides them.",
+      "offerScope": "The site accepts membership and service requests. The contract and payment are completed after manager confirmation.",
+      "offerPayment": "Online checkout is not enabled yet. A manager will confirm payment methods.",
+      "todoNote": "Legal details and final wording — confirm with the club (see CONTENT_TODO.md)."
+    }
+  }
+}

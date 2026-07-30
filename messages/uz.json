@@ -1,0 +1,210 @@
+{
+  "meta": {
+    "siteName": "Buka FIT",
+    "defaultTitle": "Buka FIT — Toshkent markazida 24/7 fitnes",
+    "defaultDescription": "Mirabadda 2000 m² fitnes hududi: zal, basseyn, sauna va hammom. Kunu tun ochiq."
+  },
+  "nav": {
+    "pricing": "Abonementlar",
+    "schedule": "Jadval",
+    "services": "Xizmatlar",
+    "trainers": "Murabbiylar",
+    "contacts": "Kontaktlar",
+    "about": "Klub haqida",
+    "faq": "FAQ",
+    "home": "Bosh sahifa",
+    "openMenu": "Menyuni ochish",
+    "closeMenu": "Menyuni yopish"
+  },
+  "cta": {
+    "choosePlan": "Abonement tanlash",
+    "leaveRequest": "Ariza qoldirish",
+    "writeTelegram": "Telegramga yozish",
+    "call": "Qo‘ng‘iroq qilish",
+    "memberships": "Abonementlar",
+    "signUp": "Yozilish"
+  },
+  "openNow": {
+    "label": "Hozir ochiq",
+    "aria": "Klub hozir ochiq, Toshkent mahalliy vaqti {time}"
+  },
+  "locale": {
+    "label": "Til",
+    "ru": "RU",
+    "uz": "UZ",
+    "en": "EN"
+  },
+  "footer": {
+    "tagline": "2000 m² fitnes hududi. Yopilmaydi.",
+    "hours": "24/7 ochiq",
+    "legal": "Hujjatlar",
+    "privacy": "Maxfiylik siyosati",
+    "offer": "Ommaviy oferta",
+    "social": "Ijtimoiy tarmoqlar",
+    "address": "Manzil",
+    "rights": "Buka FIT. Toshkent."
+  },
+  "lead": {
+    "title": "Ariza qoldirish",
+    "name": "Ism",
+    "phone": "Telefon",
+    "selectedPlan": "Tarif",
+    "noPlan": "Hali tanlanmagan",
+    "submitting": "Yuborilmoqda…",
+    "successTitle": "Ariza yuborildi",
+    "successBody": "Menejer 15 daqiqa ichida bog‘lanadi.",
+    "writeTelegramNow": "Hozir Telegramga yozish",
+    "close": "Yopish",
+    "errorTitle": "Yuborib bo‘lmadi",
+    "errorBody": "Qo‘ng‘iroq qiling yoki Telegramga yozing — menejer 24/7 aloqada.",
+    "errors": {
+      "name": "Ismni kiriting (kamida 2 belgi)",
+      "phone": "Raqamni +998 XX XXX XX XX formatida kiriting"
+    }
+  },
+  "home": {
+    "hero": {
+      "headline": "Zalingiz yopilmaydi",
+      "subtitle": "Toshkent markazida 2000 m² · basseyn · sauna va hammom · 24/7"
+    },
+    "pricing": {
+      "eyebrow": "Abonementlar",
+      "title": "Muddatni tanlang",
+      "description": "Narxlar saytda. Ariza qoldiring — menejer tasdiqlaydi va rasmiylashtiradi.",
+      "badge": "Foydali tanlov",
+      "allPlans": "Barcha shartlar"
+    },
+    "services": {
+      "eyebrow": "Makon",
+      "title": "Ichida nima bor",
+      "description": "Zal, suv, issiqlik va shaxsiy format — bir hududda.",
+      "all": "Barcha xizmatlar"
+    },
+    "schedule": {
+      "eyebrow": "Guruhlar",
+      "title": "Bugun klubda",
+      "description": "Kunning qisqa ko‘rinishi. To‘liq jadval — schedule sahifasida.",
+      "full": "To‘liq jadval",
+      "empty": "Bugun uchun qoralamada mashg‘ulot yo‘q — to‘liq jadvalni ko‘ring."
+    },
+    "trainers": {
+      "eyebrow": "Jamoa",
+      "title": "Murabbiylar",
+      "description": "Kartochkalar tayyor. Ism va foto klub ma’lumotidan keyin qo‘shiladi.",
+      "all": "Barcha murabbiylar",
+      "experience": "{years} yillik tajriba",
+      "experienceTodo": "Tajriba — aniqlashtiriladi"
+    },
+    "gallery": {
+      "eyebrow": "Muhit",
+      "title": "Galereya",
+      "description": "Hozircha zona placeholderlari. Haqiqiy fotolar joylashuvni o‘zgartirmasdan almashtiriladi.",
+      "slots": {
+        "gym": "Trenajyor zali",
+        "pool": "Basseyn",
+        "group": "Guruhlar",
+        "spa": "Sauna va hammom",
+        "massage": "Massaj",
+        "cafe": "Kafe"
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "title": "Ko‘p so‘raladiganlar",
+      "description": "Rejim, abonement tarkibi va to‘lov haqida qisqacha.",
+      "all": "Barcha savollar"
+    },
+    "contacts": {
+      "eyebrow": "Kontaktlar",
+      "title": "Bizni qanday topish",
+      "description": "Toshkent markazi. Kunu tun ochiq.",
+      "address": "Manzil",
+      "hours": "Ish vaqti",
+      "open247": "24/7 ochiq",
+      "phone": "Telefon",
+      "social": "Ijtimoiy tarmoqlar",
+      "openGoogle": "Google Mapsda ochish",
+      "open2gis": "2GISda ochish",
+      "mapTitle": "Buka FIT xaritasi",
+      "mapPlaceholder": "Mirabad, 41/6",
+      "loadMap": "Xaritani ko‘rsatish"
+    },
+    "finalCta": {
+      "title": "Boshlashga tayyormisiz?",
+      "description": "Ikki maydon — va menejer aloqada. Yoki hozir Telegramga yozing."
+    }
+  },
+  "phase": {
+    "stubTitle": "Bo‘lim tayyorlanmoqda",
+    "stubBody": "Sahifa kontenti keyingi bosqichda paydo bo‘ladi. Navigatsiya, tillar va kontent qatlami ulangan."
+  },
+  "pages": {
+    "pricing": {
+      "metaTitle": "Abonementlar va narxlar",
+      "metaDescription": "Oy, 6 oy, yil va VIP — Buka FIT. Narxlar saytda — 2 qadamda ariza qoldiring.",
+      "howToBuy": {
+        "title": "Qanday sotib olish",
+        "description": "Uchta qisqa qadam — yashirin narxlarsiz.",
+        "step1Title": "Tarifni tanlang",
+        "step1Body": "Muddat va tarkibni shu sahifada solishtiring.",
+        "step2Title": "Ariza qoldiring",
+        "step2Body": "Ism va telefon — menejer tafsilotlarni tasdiqlaydi.",
+        "step3Title": "Klubda rasmiylashtiring",
+        "step3Body": "To‘lov va kirish — menejer bilan bog‘langandan keyin."
+      }
+    },
+    "schedule": {
+      "metaTitle": "Guruh dasturlari jadvali",
+      "metaDescription": "Buka FIT guruh dasturlari hafta kunlari bo‘yicha. Dolzarbi Telegramda.",
+      "eyebrow": "Guruhlar",
+      "title": "Jadval",
+      "description": "Yo‘naltiruvchi qoralama. Dolzarb jadval — Telegram @bukafit24 da.",
+      "daysAria": "Hafta kunlari",
+      "filtersAria": "Yo‘nalishlar",
+      "allDirections": "Hammasi",
+      "empty": "Bu kun uchun qoralamada mashg‘ulot yo‘q."
+    },
+    "services": {
+      "metaTitle": "Klub xizmatlari",
+      "metaDescription": "Trenajyor zali, basseyn, guruhlar, SPA, massaj, bolalar formati va shaxsiy mashg‘ulotlar."
+    },
+    "service": {
+      "eyebrow": "Xizmat",
+      "forWhom": "Kim uchun"
+    },
+    "trainers": {
+      "metaTitle": "Murabbiylar",
+      "metaDescription": "Buka FIT jamoasi. Ism va foto klub ma’lumotidan keyin qo‘shiladi."
+    },
+    "contacts": {
+      "metaTitle": "Kontaktlar",
+      "metaDescription": "Buka FIT manzili Mirabadda, telefon, Telegram va xarita."
+    },
+    "about": {
+      "metaTitle": "Klub haqida",
+      "metaDescription": "Buka FIT — Toshkent markazida 2000 m² fitness 24/7.",
+      "eyebrow": "Klub",
+      "title": "Buka FIT haqida",
+      "body": "Buka FIT — Toshkent markazida 2000 m² fitness hududi. Klub kunu tun ochiq: zal, basseyn, kiyinish xonalaridagi sauna va hammom, guruh dasturlari va shaxsiy format — bitta maydonda."
+    },
+    "faq": {
+      "metaTitle": "FAQ",
+      "metaDescription": "Abonement, tashrif, basseyn, to‘lov va bolalar formati haqida javoblar.",
+      "title": "Savol-javob",
+      "description": "Qisqa va aniq. Bahsli shartlar menejerda tasdiqlanadi."
+    },
+    "legal": {
+      "privacyTitle": "Maxfiylik siyosati",
+      "privacyDescription": "Buka FIT arizalardagi shaxsiy ma’lumotlarni qanday qayta ishlashi.",
+      "privacyIntro": "Saytda ariza qoldirib, abonement va xizmatlar bo‘yicha bog‘lanish uchun ism va telefon raqamingizni yuborasiz.",
+      "privacyData": "Ma’lumotlar faqat murojaatni qayta ishlash uchun ishlatiladi va uchinchi shaxslarga sotilmaydi. Saqlash va o‘chirish — klub kontaktlari orqali so‘rov bilan.",
+      "privacyContact": "Ma’lumotlar bo‘yicha klub Telegramiga yozing yoki saytdagi telefonga qo‘ng‘iroq qiling.",
+      "offerTitle": "Ommaviy oferta",
+      "offerDescription": "Buka FIT xizmatlari shartlari (klub rekvizitlarigacha shablon).",
+      "offerIntro": "Bu hujjat — ommaviy oferta shabloni. Yuridik shaxs rekvizitlari klub ma’lumotidan keyin qo‘shiladi.",
+      "offerScope": "Sayt abonement va xizmatlarga ariza qabul qiladi. Shartnoma va to‘lov menejer tasdig‘idan keyin rasmiylashtiriladi.",
+      "offerPayment": "Saytda onlayn to‘lov hozircha yo‘q. Dolzarb to‘lov usullarini menejer aytadi.",
+      "todoNote": "Yuridik rekvizitlar va yakuniy matnlar — klubdan aniqlashtiriladi (CONTENT_TODO.md)."
+    }
+  }
+}
