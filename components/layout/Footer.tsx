@@ -25,7 +25,7 @@ export async function Footer() {
   const address = club.address.full[locale];
 
   return (
-    <footer className="bg-ink text-chalk">
+    <footer className="gradient-pool motion-safe:animate-gradient-drift text-chalk">
       <div className="container-content py-12 md:py-16">
         <p className="font-display text-display-section w-full text-chalk">
           {club.name}

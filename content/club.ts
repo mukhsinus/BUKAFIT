@@ -42,7 +42,7 @@ export const club = {
     salesManagerUrl: "https://t.me/BUKAFIT_SALESMANAGER",
   },
   maps: {
-    /** Статичная подложка до клика; iframe Яндекс — по взаимодействию (Фаза 3+) */
+    /** Lazy map: without NEXT_PUBLIC_MAPS_* → external Google Maps; embed only when env enables it */
     yandexEmbedQuery: "Buka FIT Мирабад 41/6 Ташкент",
     googleMapsUrl:
       "https://www.google.com/maps/search/?api=1&query=41.2995,69.2797",

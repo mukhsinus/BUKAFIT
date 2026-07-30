@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/lib/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
 import { PriceDisplay } from "@/components/ui/PriceDisplay";
-import { PriceRow } from "@/components/ui/PriceRow";
+import { PriceCard } from "@/components/ui/PriceCard";
 import { useLead } from "@/components/lead/LeadProvider";
 import { dayPass, plans } from "@/content/plans";
 import { trackEvent } from "@/lib/analytics";
@@ -77,13 +77,30 @@ export function PricingSection({
               </Link>
             ) : null}
           </div>
+        </Reveal>
 
-          <ul className="border-y border-mineral">
-            {plans.map((plan) => (
-              <PriceRow key={plan.id} plan={plan} onSelect={select} />
-            ))}
-          </ul>
+        {/*
+          Subgrid: общие row-track для карточек одного ряда.
+          Карточки — прямые дети грида (span 7 + grid-rows-subgrid).
+        */}
+        <div
+          className={[
+            "grid grid-cols-1 gap-x-4 gap-y-4 pt-5",
+            "md:grid-cols-2 md:gap-x-5 md:gap-y-5",
+            "xl:grid-cols-4 xl:gap-x-6 xl:gap-y-0 xl:pt-6",
+          ].join(" ")}
+        >
+          {plans.map((plan, index) => (
+            <PriceCard
+              key={plan.id}
+              plan={plan}
+              onSelect={select}
+              delay={index * 0.08}
+            />
+          ))}
+        </div>
 
+        <Reveal delay={0.35}>
           <div className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-2">
             <span className="font-mono-label text-ink/60">
               {dayPass.name[locale]}

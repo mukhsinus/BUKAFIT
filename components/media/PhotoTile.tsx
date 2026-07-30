@@ -1,8 +1,10 @@
 "use client";
 
+import { useRef, type MouseEvent } from "react";
 import Image from "next/image";
 import { Link } from "@/lib/i18n/navigation";
 import { useCanHover } from "@/hooks/useCanHover";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { cn } from "@/lib/utils";
 
 type PhotoTileProps = {
@@ -20,6 +22,7 @@ type PhotoTileProps = {
 /**
  * Фотоплитка §4.4 — full-bleed без рамки/радиуса, нижний скрим, белый текст.
  * Без href — статичная плитка (about); с href — ссылка (мозаика услуг).
+ * Реальное фото: параллакс 4–6px за курсором (desktop).
  */
 export function PhotoTile({
   title,
@@ -33,29 +36,56 @@ export function PhotoTile({
   aspectClass = "aspect-[4/5] lg:aspect-auto",
 }: PhotoTileProps) {
   const canHover = useCanHover();
+  const reduce = usePrefersReducedMotion();
+  const mediaRef = useRef<HTMLDivElement>(null);
+  const hasRealPhoto = Boolean(src && !src.endsWith(".svg"));
+
+  const onMove = (e: MouseEvent<HTMLElement>) => {
+    if (!canHover || reduce || !hasRealPhoto || !mediaRef.current) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const nx = (e.clientX - rect.left) / rect.width - 0.5;
+    const ny = (e.clientY - rect.top) / rect.height - 0.5;
+    const max = 5;
+    mediaRef.current.style.transform = `translate(${nx * max}px, ${ny * max}px) scale(1.06)`;
+  };
+
+  const onLeave = () => {
+    if (!mediaRef.current) return;
+    mediaRef.current.style.transform = canHover
+      ? "translate(0px, 0px) scale(1.03)"
+      : "translate(0px, 0px) scale(1)";
+  };
 
   const inner = (
     <>
-      {src ? (
-        <Image
-          src={src}
-          alt=""
-          fill
-          sizes={sizes}
-          className={cn(
-            "object-cover brightness-[0.92] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
-            canHover && "group-hover:scale-[1.03]",
-          )}
-        />
-      ) : (
-        <div
-          className={cn(
-            "absolute inset-0 bg-mineral transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
-            canHover && "group-hover:scale-[1.03]",
-          )}
-          aria-label={placeholderLabel}
-        />
-      )}
+      <div
+        ref={mediaRef}
+        className={cn(
+          "absolute inset-[-6px]",
+          "transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          canHover && !hasRealPhoto && "group-hover:scale-[1.03]",
+        )}
+        style={
+          canHover && hasRealPhoto && !reduce
+            ? { transform: "translate(0px, 0px) scale(1.03)" }
+            : undefined
+        }
+      >
+        {src ? (
+          <Image
+            src={src}
+            alt=""
+            fill
+            sizes={sizes}
+            className="object-cover brightness-[0.92]"
+          />
+        ) : (
+          <div
+            className="absolute inset-0 bg-mineral"
+            aria-label={placeholderLabel}
+          />
+        )}
+      </div>
 
       <div
         className="pointer-events-none absolute inset-0"
@@ -66,7 +96,6 @@ export function PhotoTile({
         aria-hidden
       />
 
-      {/* Densified scrim on hover — opacity only */}
       <div
         className={cn(
           "pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
@@ -108,11 +137,20 @@ export function PhotoTile({
 
   if (href) {
     return (
-      <Link href={href} className={shell}>
+      <Link
+        href={href}
+        className={shell}
+        onMouseMove={onMove}
+        onMouseLeave={onLeave}
+      >
         {inner}
       </Link>
     );
   }
 
-  return <div className={shell}>{inner}</div>;
+  return (
+    <div className={shell} onMouseMove={onMove} onMouseLeave={onLeave}>
+      {inner}
+    </div>
+  );
 }

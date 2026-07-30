@@ -69,11 +69,17 @@ export function AccordionItem({
             {title}
           </span>
           <span
-            className="shrink-0 font-mono text-lg text-ink/50"
+            key={open ? "open" : "closed"}
+            className={cn(
+              "shrink-0 font-mono text-lg text-ink/50",
+              open && !ctx.reduce && "motion-safe:animate-faq-plus",
+            )}
             style={{
               display: "inline-block",
               transform: open ? "rotate(45deg)" : "rotate(0deg)",
-              transition: `transform ${duration} cubic-bezier(0.22, 1, 0.36, 1)`,
+              transition: ctx.reduce
+                ? "none"
+                : `transform ${duration} cubic-bezier(0.22, 1, 0.36, 1)`,
             }}
             aria-hidden
           >

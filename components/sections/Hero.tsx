@@ -2,7 +2,12 @@
 
 import { useTranslations } from "next-intl";
 import { HeroMedia } from "@/components/media/HeroMedia";
-import { Stagger, StaggerItem } from "@/components/motion/Reveal";
+import { HeroCursorGlow } from "@/components/motion/HeroCursorGlow";
+import {
+  HeroHeadlineReveal,
+  Stagger,
+  StaggerItem,
+} from "@/components/motion/Reveal";
 import { HeroClock } from "@/components/sections/HeroClock";
 import { NowInClub } from "@/components/sections/NowInClub";
 import { useLead } from "@/components/lead/LeadProvider";
@@ -19,20 +24,20 @@ export function Hero() {
   return (
     <section className="relative flex h-[100svh] min-h-[100svh] flex-col overflow-hidden bg-ink">
       <HeroMedia mode="image" alt={club.name} src="/media/placeholders/hero.svg" />
+      <HeroCursorGlow />
 
       <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
-        <div className="container-content flex flex-1 flex-col pt-[max(5.5rem,env(safe-area-inset-top))] pb-6 md:pb-8">
+        <div className="container-content flex flex-1 flex-col pt-[max(5.5rem,env(safe-area-inset-top))] pb-4 md:pb-5">
           <Stagger className="flex flex-1 flex-col" stagger={0.08}>
             <StaggerItem>
               <HeroClock />
             </StaggerItem>
 
             <div className="mt-auto w-full">
-              {/* Headline paints immediately (LCP) — no opacity:0 entrance */}
-              <h1 className="font-display text-display-hero text-chalk">
-                <span className="block whitespace-nowrap">{t("headlineLine1")}</span>
-                <span className="block whitespace-nowrap">{t("headlineLine2")}</span>
-              </h1>
+              <HeroHeadlineReveal
+                className="font-display text-display-hero text-chalk"
+                lines={[t("headlineLine1"), t("headlineLine2")]}
+              />
 
               <StaggerItem>
                 <p className="mt-5 max-w-[60ch] text-body-lg text-chalk/85">
@@ -69,17 +74,12 @@ export function Hero() {
                 </div>
               </StaggerItem>
             </div>
-          </Stagger>
-        </div>
 
-        <div className="border-t border-[rgba(244,245,243,0.14)]">
-          <div className="container-content py-3 md:py-3.5">
-            <Stagger stagger={0.08} delayChildren={0.48}>
-              <StaggerItem>
-                <NowInClub />
-              </StaggerItem>
-            </Stagger>
-          </div>
+            {/* Тонкая mono-строка — последний элемент внутри hero, без отдельного блока */}
+            <StaggerItem className="mt-6 md:mt-7">
+              <NowInClub />
+            </StaggerItem>
+          </Stagger>
         </div>
       </div>
     </section>

@@ -9,6 +9,11 @@
   --color-pool: #0d6e7c;
   --color-pool-deep: #0a5460;
 
+  /* Живой градиент поверх ink — Фаза 9; не третий цвет палитры */
+  --gradient-pool:
+    radial-gradient(ellipse at 30% 20%, #0d6e7c 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, #0a5460 0%, transparent 45%);
+
   --font-display: var(--font-geologica), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
@@ -91,6 +96,23 @@
   .surface-ink {
     background-color: var(--color-ink);
     color: var(--color-chalk);
+  }
+
+  /**
+   * Сигнатурный mesh/aurora поверх ink.
+   * Только: hero (под медиа), карточка «Год», футер, Final CTA.
+   */
+  .gradient-pool {
+    background-color: var(--color-ink);
+    background-image: var(--gradient-pool);
+    background-size: 160% 160%, 180% 180%;
+    background-position: 0% 20%, 100% 80%;
+    background-repeat: no-repeat;
+  }
+
+  /* Hover на строке «Год»: дрейф ускоряется до 8s */
+  .gradient-pool-year:hover .gradient-pool-layer {
+    animation-duration: 8s;
   }
 
   .hairline {
@@ -240,6 +262,57 @@
   }
 }
 
+@keyframes gradient-drift {
+  0% {
+    background-position: 0% 20%, 100% 80%;
+  }
+  100% {
+    background-position: 45% 0%, 55% 100%;
+  }
+}
+
+@keyframes badge-pulse {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes pin-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  35% {
+    transform: translateY(-10px);
+  }
+  55% {
+    transform: translateY(-2px);
+  }
+  70% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes faq-plus-pop {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  40% {
+    transform: rotate(45deg) scale(0.9);
+  }
+  100% {
+    transform: rotate(45deg) scale(1);
+  }
+}
+
+@utility animate-faq-plus {
+  animation: faq-plus-pop 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 @utility animate-open-pulse {
   animation: open-pulse 1.8s ease-out infinite;
 }
@@ -249,9 +322,25 @@
   animation: ken-burns 18s ease-out 1.2s forwards;
 }
 
+@utility animate-gradient-drift {
+  animation: gradient-drift 24s ease-in-out infinite alternate;
+}
+
+@utility animate-badge-pulse {
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+
+@utility animate-pin-bounce {
+  animation: pin-bounce 0.55s ease-out 2;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .motion-safe\:animate-open-pulse,
-  .motion-safe\:animate-ken-burns {
+  .motion-safe\:animate-ken-burns,
+  .motion-safe\:animate-gradient-drift,
+  .motion-safe\:animate-badge-pulse,
+  .motion-safe\:animate-pin-bounce,
+  .motion-safe\:animate-faq-plus {
     animation: none !important;
   }
 

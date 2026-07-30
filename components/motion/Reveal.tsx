@@ -16,7 +16,7 @@ type RevealProps = {
   asChild?: boolean;
 } & Omit<HTMLMotionProps<"div">, "children">;
 
-const rise = { opacity: 0, y: 12 };
+const rise = { opacity: 0, y: 16 };
 const shown = { opacity: 1, y: 0 };
 
 export function Reveal({
@@ -37,7 +37,7 @@ export function Reveal({
       initial={rise}
       whileInView={shown}
       viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay }}
       {...rest}
     >
       {children}
@@ -84,7 +84,7 @@ export function Stagger({
 export function StaggerItem({
   children,
   className,
-  /** Строки hero: выезд из-под маски (clip-path + translateY) */
+  /** Строки hero: clip-path слева-направо */
   mask = false,
 }: {
   children: ReactNode;
@@ -99,21 +99,18 @@ export function StaggerItem({
 
   if (mask) {
     return (
-      <span className={cn("block overflow-hidden", className)}>
-        <motion.span
-          className="block"
-          variants={{
-            hidden: { y: "110%", opacity: 0 },
-            show: {
-              y: "0%",
-              opacity: 1,
-              transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-            },
-          }}
-        >
-          {children}
-        </motion.span>
-      </span>
+      <motion.span
+        className={cn("block", className)}
+        variants={{
+          hidden: { clipPath: "inset(0 100% 0 0)" },
+          show: {
+            clipPath: "inset(0 0% 0 0)",
+            transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+          },
+        }}
+      >
+        {children}
+      </motion.span>
     );
   }
 
@@ -121,15 +118,70 @@ export function StaggerItem({
     <motion.div
       className={className}
       variants={{
-        hidden: { opacity: 0, y: 12 },
+        hidden: { opacity: 0, y: 16 },
         show: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+          transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
         },
       }}
     >
       {children}
     </motion.div>
+  );
+}
+
+/** Построчный clip-path reveal для hero-заголовка */
+export function HeroHeadlineReveal({
+  lines,
+  className,
+}: {
+  lines: string[];
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+
+  if (reduce) {
+    return (
+      <h1 className={className}>
+        {lines.map((line) => (
+          <span key={line} className="block whitespace-nowrap">
+            {line}
+          </span>
+        ))}
+      </h1>
+    );
+  }
+
+  return (
+    <h1 className={className}>
+      <motion.span
+        className="block"
+        initial="hidden"
+        animate="show"
+        variants={{
+          hidden: {},
+          show: {
+            transition: { staggerChildren: 0.15, delayChildren: 0.12 },
+          },
+        }}
+      >
+        {lines.map((line) => (
+          <motion.span
+            key={line}
+            className="block whitespace-nowrap"
+            variants={{
+              hidden: { clipPath: "inset(0 100% 0 0)" },
+              show: {
+                clipPath: "inset(0 0% 0 0)",
+                transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+              },
+            }}
+          >
+            {line}
+          </motion.span>
+        ))}
+      </motion.span>
+    </h1>
   );
 }

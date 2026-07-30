@@ -12,7 +12,7 @@ type HeroMediaProps = {
 };
 
 /**
- * Full-bleed hero media over ink.
+ * Full-bleed hero media over ink + gradient-pool (просвечивает по краям).
  * Double scrim: bottom for copy, light top under header. No placeholder text overlay.
  */
 export function HeroMedia({
@@ -24,9 +24,15 @@ export function HeroMedia({
 }: HeroMediaProps) {
   return (
     <div className={cn("absolute inset-0 overflow-hidden bg-ink", className)}>
+      {/* Живой градиент под медиа — виден по краям / через скрим */}
+      <div
+        className="gradient-pool motion-safe:animate-gradient-drift absolute inset-0"
+        aria-hidden
+      />
+
       {mode === "video" && poster ? (
         <video
-          className="h-full w-full object-cover brightness-[0.92]"
+          className="relative h-full w-full object-cover brightness-[0.92]"
           autoPlay
           muted
           loop
@@ -38,11 +44,11 @@ export function HeroMedia({
           <source src={src} />
         </video>
       ) : src.endsWith(".svg") ? (
-        /* Flat SVG placeholder: CSS bg avoids next/image decode on LCP path */
+        /* SVG-плейсхолдер полупрозрачен — aurora видна по краям */
         <div
-          className="absolute inset-0 bg-ink motion-safe:animate-ken-burns"
+          className="absolute inset-0 motion-safe:animate-ken-burns opacity-[0.55]"
           style={{
-            backgroundImage: `linear-gradient(180deg, #1a2228 0%, #101418 55%)`,
+            backgroundImage: `linear-gradient(180deg, #1a2228 0%, transparent 70%)`,
           }}
           aria-hidden
         />

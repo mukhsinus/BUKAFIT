@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { LeadProvider } from "@/components/lead/LeadProvider";
 import { LeadModal } from "@/components/lead/LeadModal";
 import { StickyCtaBar } from "@/components/lead/StickyCtaBar";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
 
 type SiteLayoutProps = {
   children: ReactNode;
@@ -14,6 +15,7 @@ export default function SiteLayout({ children }: SiteLayoutProps) {
   return (
     <LeadProvider>
       <div className="flex min-h-dvh flex-col pb-[calc(4.25rem+env(safe-area-inset-bottom))] md:pb-0">
+        <ScrollProgress />
         <Header />
         <HeaderSpacer />
         <main className="flex-1">{children}</main>
