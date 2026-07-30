@@ -183,18 +183,14 @@ export function Header() {
         data-open={open ? "true" : "false"}
         inert={open ? undefined : true}
         className={cn(
-          "mobile-nav fixed inset-0 z-[55] lg:hidden",
-          open ? "pointer-events-auto" : "pointer-events-none",
+          "mobile-nav fixed inset-0 z-[55] lg:hidden transition-[opacity,visibility] duration-300",
+          open
+            ? "pointer-events-auto visible opacity-100"
+            : "pointer-events-none invisible opacity-0",
         )}
+        style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
       >
-        <div
-          className={cn(
-            "absolute inset-0 bg-ink transition-opacity duration-300",
-            open ? "opacity-100" : "opacity-0",
-          )}
-          style={{ transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)" }}
-          aria-hidden
-        >
+        <div className="absolute inset-0 bg-ink" aria-hidden>
           <div className="gradient-pool motion-safe:animate-gradient-drift absolute inset-0" />
           <div
             className="pointer-events-none absolute -left-[20%] top-[12%] h-[55vmin] w-[55vmin] rounded-full opacity-50 blur-3xl"
@@ -217,9 +213,9 @@ export function Header() {
             className="flex flex-1 flex-col justify-center"
             aria-label="Mobile"
           >
-            <ul className="border-t border-chalk/12">
+            <ul className="divide-y divide-chalk/12 border-y border-chalk/12">
               {navItems.map((item, index) => (
-                <li key={item.href} className="border-b border-chalk/12">
+                <li key={item.href}>
                   <Link
                     href={item.href}
                     className="mobile-nav-link group flex min-h-[3.75rem] items-baseline gap-4 py-4"
