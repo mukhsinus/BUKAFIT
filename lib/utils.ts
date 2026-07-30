@@ -2,21 +2,30 @@ export function cn(...parts: Array<string | false | null | undefined>): string {
   return parts.filter(Boolean).join(" ");
 }
 
-export function formatPriceUzs(amount: number, locale: string): string {
-  const formatted = new Intl.NumberFormat(
+export function formatPriceAmount(amount: number, locale: string): string {
+  return new Intl.NumberFormat(
     locale === "en" ? "en-US" : locale === "uz" ? "uz-UZ" : "ru-RU",
-    {
-      maximumFractionDigits: 0,
-    },
+    { maximumFractionDigits: 0 },
   ).format(amount);
+}
 
-  if (locale === "en") {
-    return `${formatted} UZS`;
-  }
+export function formatPriceCurrency(locale: string): string {
+  if (locale === "en") return "UZS";
+  if (locale === "uz") return "so‘m";
+  return "сум";
+}
 
-  if (locale === "uz") {
-    return `${formatted} so‘m`;
-  }
+export function formatPriceParts(
+  amount: number,
+  locale: string,
+): { amount: string; currency: string } {
+  return {
+    amount: formatPriceAmount(amount, locale),
+    currency: formatPriceCurrency(locale),
+  };
+}
 
-  return `${formatted} сум`;
+export function formatPriceUzs(amount: number, locale: string): string {
+  const { amount: formatted, currency } = formatPriceParts(amount, locale);
+  return `${formatted} ${currency}`;
 }

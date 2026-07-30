@@ -36,14 +36,17 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-line/80 bg-graphite/90 backdrop-blur-md">
       <div className="container-content flex h-16 items-center justify-between gap-4 lg:h-[4.25rem]">
-        <div className="flex min-w-0 items-center gap-4">
+      <div className="flex min-w-0 items-center gap-2 sm:gap-3 md:gap-4">
           <Link
             href="/"
-            className="font-display text-lg uppercase tracking-[0.04em] text-smoke md:text-xl"
+            className="shrink-0 font-display text-lg uppercase tracking-[0.04em] text-smoke md:text-xl"
           >
             {club.name}
           </Link>
-          <OpenNowBadge className="hidden sm:inline-flex" />
+          <OpenNowBadge
+            size="sm"
+            className="min-w-0 rounded-sm border border-brass/35 bg-brass/10 px-2 py-1 text-[0.65rem] sm:text-[0.7rem] md:text-xs"
+          />
         </div>
 
         <nav
@@ -111,7 +114,6 @@ export function Header() {
         )}
       >
         <div className="container-content flex flex-col gap-4 py-4">
-          <OpenNowBadge />
           <nav className="flex flex-col gap-1" aria-label="Mobile">
             {navItems.map((item) => (
               <Link

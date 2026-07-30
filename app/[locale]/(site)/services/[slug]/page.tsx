@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { MediaImage, type MediaSlot } from "@/components/media/MediaImage";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { getServiceBySlug, serviceSlugs } from "@/content/services";
@@ -41,8 +42,8 @@ export default async function ServicePage({ params }: PageProps) {
 
   return (
     <>
-      <section className="py-[clamp(4rem,10vw,7.5rem)]">
-        <div className="container-content grid gap-10 lg:grid-cols-2">
+      <section className="section-y">
+        <div className="container-content grid gap-8 lg:grid-cols-2">
           <div>
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-brass">
               {t("eyebrow")}
@@ -58,12 +59,12 @@ export default async function ServicePage({ params }: PageProps) {
               <p className="mt-2 text-sm text-smoke">{service.forWhom[typedLocale]}</p>
             </div>
           </div>
-          <div className="aspect-[4/3] overflow-hidden border border-line bg-graphite">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={`/media/placeholders/${service.mediaSlot}.svg`}
+          <div className="relative aspect-[4/3] overflow-hidden border border-line bg-graphite-mid">
+            <MediaImage
+              slot={service.mediaSlot as MediaSlot}
               alt=""
-              className="h-full w-full object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="absolute inset-0"
             />
           </div>
         </div>

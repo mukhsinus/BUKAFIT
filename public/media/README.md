@@ -1,32 +1,26 @@
 # Media slots — Buka FIT
 
-Replace placeholders with real photos. Keep filenames or update references in `content/*` and components.
+Replace placeholders with real photos under `public/media/`. Keep slot names or update `components/media/MediaImage.tsx`.
 
-## Brand
+## Drop real photos here
 
-| Path | Purpose |
-|------|---------|
-| `public/media/brand/` | Logo, brandbook assets. Empty → design uses fallback palette from `docs/design-plan.md`. |
+| Slot | Suggested path | Aspect | Used on |
+|------|----------------|--------|---------|
+| Hero | `media/hero.jpg` (then point MediaImage/HeroMedia) | 16:9 · ≥1920×1080 | Home hero |
+| Gym | `media/gym.jpg` | 4:3 · ≥1600×1200 | Services, gallery |
+| Pool | `media/pool.jpg` | 4:3 | Services, gallery |
+| Group | `media/group.jpg` | 4:3 | Services, gallery |
+| Spa | `media/spa.jpg` | 4:3 | Services, gallery |
+| Massage | `media/massage.jpg` | 4:3 | Services, gallery |
+| Kids | `media/kids.jpg` | 4:3 | Services |
+| Personal | `media/personal.jpg` | 4:3 | Services |
+| Cafe | `media/cafe.jpg` | 4:3 | Gallery |
+| Trainer | `media/trainers/*.jpg` | 4:5 · ≥800×1000 | Trainers |
 
-When brand files appear: extract palette and propose a sync with current tokens.
+Until replaced, light dashed **PLACEHOLDER** SVGs live in `placeholders/` — they must not read as finished photos.
 
-## Placeholders (current)
+## Processing
 
-| Slot | File | Suggested size | Aspect |
-|------|------|----------------|--------|
-| Hero | `placeholders/hero.svg` | 1920×1080 | 16:9 |
-| Gym | `placeholders/gym.svg` | 1600×1200 | 4:3 |
-| Pool | `placeholders/pool.svg` | 1600×1200 | 4:3 |
-| Group | `placeholders/group.svg` | 1600×1200 | 4:3 |
-| Spa | `placeholders/spa.svg` | 1600×1200 | 4:3 |
-| Massage | `placeholders/massage.svg` | 1600×1200 | 4:3 |
-| Kids | `placeholders/kids.svg` | 1600×1200 | 4:3 |
-| Personal | `placeholders/personal.svg` | 1600×1200 | 4:3 |
-| Cafe | `placeholders/cafe.svg` | 1600×1200 | 4:3 |
-| Trainer | `placeholders/trainers/placeholder.svg` | 800×1000 | 4:5 |
-
-## Processing (from design plan)
-
-- Warm graphite base, light brass lift on highlights (~8–12% overlay).
-- Text overlay: bottom/left gradient to `graphite`.
-- Prefer AVIF/WebP via `next/image` when replacing SVGs.
+- `object-fit: cover` via `next/image` + `sizes`
+- Text under copy: gradient overlay (`overlay="bottom" | "full"`)
+- Warm graphite / brass treatment when real assets land

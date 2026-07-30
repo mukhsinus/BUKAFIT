@@ -1,13 +1,13 @@
+"use client";
+
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 type HeroMediaProps = {
   alt: string;
   className?: string;
-  /** Default: image (placeholder + ken burns). Switch to video later via one prop. */
   mode?: "image" | "video";
-  /** Image src or video src depending on mode */
   src?: string;
-  /** Required for mode="video" */
   poster?: string;
 };
 
@@ -43,16 +43,21 @@ export function HeroMedia({
           <source src={src} />
         </video>
       ) : (
-        // Placeholder SVG until real assets; next/image optional in Phase 3
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <Image
           src={src}
           alt={alt}
-          className="h-full w-full object-cover motion-safe:animate-ken-burns"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover motion-safe:animate-ken-burns"
         />
       )}
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/55 to-graphite/25"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-graphite via-graphite/70 to-graphite/35"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-graphite/55 via-transparent to-transparent"
         aria-hidden
       />
     </div>

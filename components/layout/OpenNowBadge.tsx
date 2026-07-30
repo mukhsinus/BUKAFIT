@@ -50,9 +50,9 @@ export function OpenNowBadge({ className, size = "sm" }: OpenNowBadgeProps) {
         <span className="absolute inset-0 rounded-full bg-brass motion-safe:animate-open-pulse" />
         <span className="relative h-2 w-2 rounded-full bg-brass" />
       </span>
-      <span>
-        {t("label")}
-        <span className="text-smoke-muted"> · {time}</span>
+      <span className="min-w-0">
+        <span className="whitespace-nowrap">{t("label")}</span>
+        <span className="hidden text-smoke-muted sm:inline"> · {time}</span>
       </span>
     </p>
   );

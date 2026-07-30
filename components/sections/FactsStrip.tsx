@@ -1,3 +1,6 @@
+"use client";
+
+import { CountUp } from "@/components/motion/CountUp";
 import { club } from "@/content/club";
 import type { AppLocale } from "@/lib/i18n/routing";
 
@@ -6,21 +9,43 @@ type FactsStripProps = {
 };
 
 export function FactsStrip({ locale }: FactsStripProps) {
+  const areaSuffix = locale === "ru" ? " м²" : " m²";
+
+  const labels = club.facts.map((fact) => {
+    if (fact.id === "area") {
+      return (
+        <span key={fact.id} className="inline-flex items-baseline">
+          <CountUp value={club.areaSqm} />
+          {areaSuffix}
+        </span>
+      );
+    }
+    return <span key={fact.id}>{fact.label[locale]}</span>;
+  });
+
+  const renderRow = (prefix: string, ariaHidden?: boolean) =>
+    labels.map((node, index) => (
+      <li
+        key={`${prefix}-${index}`}
+        className="inline-flex shrink-0 items-center gap-8 font-display text-sm uppercase tracking-[0.1em] text-smoke md:text-base"
+        aria-hidden={ariaHidden || undefined}
+      >
+        {node}
+        <span className="text-brass" aria-hidden>
+          ·
+        </span>
+      </li>
+    ));
+
   return (
     <section
       aria-label="Facts"
-      className="border-y border-line bg-graphite-elevated"
+      className="overflow-hidden border-y border-line bg-graphite-elevated"
     >
-      <div className="container-content">
-        <ul className="flex snap-x gap-6 overflow-x-auto py-5 md:grid md:grid-cols-5 md:gap-4 md:overflow-visible md:py-6">
-          {club.facts.map((fact) => (
-            <li
-              key={fact.id}
-              className="snap-start whitespace-nowrap font-display text-sm uppercase tracking-[0.08em] text-smoke md:text-center md:text-base"
-            >
-              {fact.label[locale]}
-            </li>
-          ))}
+      <div className="relative flex py-3.5 md:py-4">
+        <ul className="flex min-w-max items-center gap-8 pr-8 motion-safe:animate-marquee">
+          {renderRow("a")}
+          {renderRow("b", true)}
         </ul>
       </div>
     </section>

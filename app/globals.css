@@ -1,47 +1,53 @@
 @import "tailwindcss";
 
 @theme {
-  --color-graphite: #1a1816;
-  --color-graphite-elevated: #24211e;
-  --color-smoke: #e8e4df;
-  --color-smoke-muted: #a39e97;
-  --color-brass: #c4a46a;
-  --color-brass-hover: #d4b87e;
-  --color-water: #6b8fa3;
-  --color-line: #3a3530;
-  --color-danger: #c45c4a;
-  --color-success: #7a9e7e;
+  /* Ровно 6 цветов — директива Фазы 8 */
+  --color-chalk: #f4f5f3;
+  --color-steam: #ffffff;
+  --color-mineral: #dde1dc;
+  --color-ink: #101418;
+  --color-pool: #0d6e7c;
+  --color-pool-deep: #0a5460;
 
-  --font-display: var(--font-unbounded), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-geologica), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 
   --breakpoint-sm: 480px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
 
-  --container-content: 72rem;
+  --container-content: 90rem; /* 1440px */
+  --radius-pill: 999px;
 }
 
 @layer base {
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   body {
-    @apply bg-graphite text-smoke font-sans antialiased;
-    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
-    line-height: 1.55;
+    @apply bg-chalk text-ink font-sans antialiased;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-x: clip;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      font-size: 17px;
+    }
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-brass);
+    outline: 2px solid var(--color-pool);
     outline-offset: 2px;
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--color-brass) 40%, transparent);
-    color: var(--color-smoke);
+    background: color-mix(in srgb, var(--color-pool) 28%, transparent);
+    color: var(--color-ink);
   }
 }
 
@@ -50,34 +56,121 @@
     width: 100%;
     max-width: var(--container-content);
     margin-inline: auto;
-    padding-inline: clamp(1rem, 4vw, 2rem);
+    padding-inline: 20px;
+  }
+
+  @media (min-width: 1024px) {
+    .container-content {
+      padding-inline: 64px;
+    }
+  }
+
+  /* Отбивка секций: 96px mobile / 128px desktop — не больше */
+  .section-y {
+    padding-block: 6rem;
+  }
+
+  @media (min-width: 1024px) {
+    .section-y {
+      padding-block: 8rem;
+    }
+  }
+
+  .surface-page {
+    background-color: var(--color-chalk);
+  }
+
+  .surface-raised {
+    background-color: var(--color-steam);
+  }
+
+  .surface-hover {
+    background-color: var(--color-mineral);
+  }
+
+  .surface-ink {
+    background-color: var(--color-ink);
+    color: var(--color-chalk);
+  }
+
+  .hairline {
+    border-color: var(--color-mineral);
+  }
+
+  .hairline-on-ink {
+    border-color: rgba(244, 245, 243, 0.14);
   }
 
   .font-display {
     font-family: var(--font-display);
     font-weight: 600;
-    letter-spacing: -0.03em;
-    line-height: 1.08;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
     text-wrap: balance;
     hyphens: none;
     overflow-wrap: normal;
     word-break: keep-all;
   }
 
+  .font-mono-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+  }
+
   .text-display-hero {
-    font-size: clamp(2rem, 7vw, 5.5rem);
+    font-size: clamp(3rem, 9vw, 8.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-weight: 600;
   }
 
   .text-display-section {
-    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-size: clamp(2.25rem, 5vw, 4.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    font-weight: 600;
   }
 
-  .text-display-price {
-    font-size: clamp(2rem, 5vw, 3rem);
+  .text-display-h3 {
+    font-size: clamp(1.375rem, 2.2vw, 2rem);
   }
 
-  .btn-brass {
-    @apply bg-brass text-graphite hover:bg-brass-hover;
+  .text-price {
+    font-size: clamp(2.25rem, 4.5vw, 4rem);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .text-body-lg {
+    font-size: clamp(1.125rem, 1.6vw, 1.5rem);
+    line-height: 1.5;
+  }
+
+  .btn-pool {
+    @apply bg-pool text-chalk hover:bg-pool-deep;
+  }
+
+  .radius-none {
+    border-radius: 0;
+  }
+
+  .radius-pill {
+    border-radius: var(--radius-pill);
+  }
+
+  .photo-scrim {
+    background-image: linear-gradient(
+      to top,
+      rgba(16, 20, 24, 0.85) 0%,
+      transparent 55%
+    );
   }
 }
 

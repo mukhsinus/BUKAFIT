@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" role="img" aria-label="Trainer placeholder">
-  <rect width="100%" height="100%" fill="#24211E"/>
-  <circle cx="400" cy="380" r="120" fill="#3A3530"/>
-  <rect x="220" y="560" width="360" height="280" rx="160" fill="#3A3530"/>
-  <text x="50%" y="92%" text-anchor="middle" fill="#A39E97" font-family="Segoe UI, Arial, sans-serif" font-size="28">Тренер · TODO</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" role="img">
+  <rect width="100%" height="100%" fill="#E8E4DF"/>
+  <rect x="24" y="24" width="752" height="952" fill="none" stroke="#C4BDB3" stroke-width="3" stroke-dasharray="12 9"/>
+  <text x="50%" y="46%" text-anchor="middle" fill="#1A1816" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">PLACEHOLDER</text>
+  <text x="50%" y="53%" text-anchor="middle" fill="#5C574F" font-family="Segoe UI, Arial, sans-serif" font-size="18">Фото скоро · Тренер · 4:5</text>
 </svg>

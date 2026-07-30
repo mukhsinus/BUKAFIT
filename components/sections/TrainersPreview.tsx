@@ -1,6 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/lib/i18n/navigation";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { MediaImage } from "@/components/media/MediaImage";
+import { Reveal } from "@/components/motion/Reveal";
 import { FEATURES } from "@/content/features";
 import { trainers } from "@/content/trainers";
 import type { AppLocale } from "@/lib/i18n/routing";
@@ -20,42 +21,48 @@ export async function TrainersPreview({
   const locale = (await getLocale()) as AppLocale;
 
   return (
-    <section className="border-t border-line py-[clamp(4rem,10vw,7.5rem)]">
+    <section className="border-t border-line section-y">
       <div className="container-content">
-        <SectionHeading
-          eyebrow={t("eyebrow")}
-          title={t("title")}
-          description={t("description")}
-          action={
-            showAllLink ? (
+        <Reveal>
+          <div className="mb-7 flex flex-col gap-3 md:mb-8 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-xl">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-brass">
+                {t("eyebrow")}
+              </p>
+              <h2 className="font-display text-display-section uppercase text-smoke">
+                {t("title")}
+              </h2>
+              <p className="mt-2 text-sm text-smoke-muted">{t("description")}</p>
+            </div>
+            {showAllLink ? (
               <Link
                 href="/trainers"
-                className="text-sm font-semibold text-brass hover:text-brass-hover"
+                className="shrink-0 text-sm font-semibold text-brass hover:text-brass-hover"
               >
                 {t("all")}
               </Link>
-            ) : undefined
-          }
-        />
+            ) : null}
+          </div>
+        </Reveal>
 
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {trainers.map((trainer) => (
             <li
               key={trainer.id}
-              className="border border-line bg-graphite-elevated p-4"
+              className="border border-line bg-graphite-elevated p-3.5"
             >
-              <div className="mb-4 aspect-[3/4] overflow-hidden bg-graphite">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/media/placeholders/trainers/placeholder.svg"
+              <div className="relative mb-3 aspect-[3/4] overflow-hidden bg-graphite-mid">
+                <MediaImage
+                  slot="trainers"
                   alt=""
-                  className="h-full w-full object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="absolute inset-0"
                 />
               </div>
               <h3 className="font-display text-lg uppercase text-smoke">
                 {trainer.name[locale]}
               </h3>
-              <p className="mt-2 text-sm text-smoke-muted">
+              <p className="mt-1.5 text-sm text-smoke-muted">
                 {trainer.specialization[locale]}
               </p>
               {trainer.yearsExperience != null ? (

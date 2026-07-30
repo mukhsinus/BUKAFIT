@@ -25,8 +25,8 @@ export async function Footer() {
 
   return (
     <footer className="border-t border-line bg-graphite-elevated">
-      <div className="container-content grid gap-10 py-12 md:grid-cols-12 md:gap-8 md:py-16">
-        <div className="md:col-span-4">
+      <div className="container-content grid gap-10 py-12 md:grid-cols-12 md:gap-6 md:py-16 lg:gap-8">
+        <div className="min-w-0 md:col-span-4">
           <p className="font-display text-2xl uppercase tracking-[0.04em] text-smoke">
             {club.name}
           </p>
@@ -34,7 +34,7 @@ export async function Footer() {
           <p className="mt-4 text-sm font-medium text-brass">{t("hours")}</p>
         </div>
 
-        <div className="md:col-span-3">
+        <div className="min-w-0 md:col-span-3">
           <p className="text-xs font-semibold uppercase tracking-wider text-smoke-muted">
             {tNav("home")}
           </p>
@@ -52,7 +52,7 @@ export async function Footer() {
           </ul>
         </div>
 
-        <div className="md:col-span-3">
+        <div className="min-w-0 md:col-span-3">
           <p className="text-xs font-semibold uppercase tracking-wider text-smoke-muted">
             {t("address")}
           </p>
@@ -89,7 +89,7 @@ export async function Footer() {
           </a>
         </div>
 
-        <div className="md:col-span-2">
+        <div className="min-w-0 md:col-span-2">
           <p className="text-xs font-semibold uppercase tracking-wider text-smoke-muted">
             {t("legal")}
           </p>
@@ -97,7 +97,7 @@ export async function Footer() {
             <li>
               <Link
                 href="/legal/privacy"
-                className="text-sm text-smoke hover:text-brass"
+                className="break-words text-sm text-smoke hover:text-brass"
               >
                 {t("privacy")}
               </Link>
@@ -105,7 +105,7 @@ export async function Footer() {
             <li>
               <Link
                 href="/legal/offer"
-                className="text-sm text-smoke hover:text-brass"
+                className="break-words text-sm text-smoke hover:text-brass"
               >
                 {t("offer")}
               </Link>

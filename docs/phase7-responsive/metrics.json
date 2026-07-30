@@ -1,0 +1,177 @@
+[
+  {
+    "width": 360,
+    "clientWidth": 360,
+    "scrollWidth": 360,
+    "overflowX": false,
+    "stickyH": 65,
+    "padBottom": "68px",
+    "clippedHeadings": false,
+    "prices": [
+      {
+        "overflowsCard": false,
+        "priceW": 294,
+        "cardW": 328,
+        "text": "1 500 000 | СУМ"
+      },
+      {
+        "overflowsCard": false,
+        "priceW": 294,
+        "cardW": 328,
+        "text": "7 500 000 | СУМ"
+      },
+      {
+        "overflowsCard": false,
+        "priceW": 292,
+        "cardW": 328,
+        "text": "10 000 000 | СУМ"
+      },
+      {
+        "overflowsCard": false,
+        "priceW": 294,
+        "cardW": 328,
+        "text": "15 000 000 | СУМ"
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "clientWidth": 390,
+    "scrollWidth": 390,
+    "overflowX": false,
+    "stickyH": 65,
+    "padBottom": "68px",
+    "clippedHeadings": false,
+    "prices": [
+      {
+        "overflowsCard": false,
+        "priceW": 324,
+        "cardW": 358,
+        "text": "1 500 000 | СУМ"
+      },
+      {
+        "overflowsCard": false,
+        "priceW": 324,
+        "cardW": 358,
+        "text": "7 500 000 | СУМ"
+      },
+      {
+        "overflowsCard": false,
+        "priceW": 322,
+        "cardW": 358,
+        "text": "10 000 000 | СУМ"
+      },
+      {
+        "overflowsCard": false,
+        "priceW": 324,
+        "cardW": 358,
+        "text": "15 000 000 | СУМ"
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "clientWidth": 768,
+    "scrollWidth": 768,
+    "overflowX": false,
+    "stickyH": 0,
+    "padBottom": "0px",
+    "clippedHeadings": false,
+    "prices": [
+      {
+        "overflowsCard": false,
+        "priceW": 305,
+        "cardW": 347,
+        "text": "1 500 000 | СУМ"
+      },
+      {
+        "overflowsCard": false,
+        "priceW": 305,
+        "cardW": 347,
+        "text": "7 500 000 | СУМ"
+      },
+      {
+        "overflowsCard": false,
+        "priceW": 303,
+        "cardW": 347,
+        "text": "10 000 000 | СУМ"
+      },
+      {
+        "overflowsCard": false,
+        "priceW": 305,
+        "cardW": 347,
+        "text": "15 000 000 | СУМ"
+      }
+    ]
+  },
+  {
+    "width": 1024,
+    "clientWidth": 1024,
+    "scrollWidth": 1024,
+    "overflowX": false,
+    "stickyH": 0,
+    "padBottom": "0px",
+    "clippedHeadings": false,
+    "prices": [
+      {
+        "overflowsCard": false,
+        "priceW": 432,
+        "cardW": 474,
+        "text": "1 500 000 | СУМ"
+      },
+      {
+        "overflowsCard": false,
+        "priceW": 432,
+        "cardW": 474,
+        "text": "7 500 000 | СУМ"
+      },
+      {
+        "overflowsCard": false,
+        "priceW": 430,
+        "cardW": 474,
+        "text": "10 000 000 | СУМ"
+      },
+      {
+        "overflowsCard": false,
+        "priceW": 432,
+        "cardW": 474,
+        "text": "15 000 000 | СУМ"
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "clientWidth": 1440,
+    "scrollWidth": 1440,
+    "overflowX": false,
+    "stickyH": 0,
+    "padBottom": "0px",
+    "clippedHeadings": false,
+    "prices": [
+      {
+        "overflowsCard": false,
+        "priceW": 218,
+        "cardW": 260,
+        "text": "1 500 000 | СУМ"
+      },
+      {
+        "overflowsCard": false,
+        "priceW": 218,
+        "cardW": 260,
+        "text": "7 500 000 | СУМ"
+      },
+      {
+        "overflowsCard": false,
+        "priceW": 222,
+        "cardW": 268,
+        "text": "10 000 000 | СУМ"
+      },
+      {
+        "overflowsCard": false,
+        "priceW": 218,
+        "cardW": 260,
+        "text": "15 000 000 | СУМ"
+      }
+    ]
+  }
+]

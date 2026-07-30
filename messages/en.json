@@ -65,6 +65,8 @@
   "home": {
     "hero": {
       "headline": "Your gym never closes",
+      "headlineLine1": "Your gym",
+      "headlineLine2": "never closes",
       "subtitle": "2000 m² in central Tashkent · pool · sauna & hammam · 24/7"
     },
     "pricing": {
