@@ -349,6 +349,187 @@
   }
 }
 
+/**
+ * Атмосфера светлых секций (тарифы, расписание) — мягкий aurora на chalk.
+ * Только pool/pool-deep/mineral из палитры, без новых цветов.
+ */
+@keyframes section-orb-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6%, 4%, 0) scale(1.1);
+  }
+}
+
+@keyframes section-orb-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(-5%, -6%, 0) scale(1);
+  }
+}
+
+@keyframes section-orb-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(3%, -4%, 0) scale(1.12);
+    opacity: 0.85;
+  }
+}
+
+.section-atmosphere {
+  isolation: isolate;
+  background:
+    radial-gradient(
+      ellipse 55% 45% at 12% 28%,
+      color-mix(in srgb, var(--color-pool) 14%, transparent) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 42% at 88% 72%,
+      color-mix(in srgb, var(--color-pool-deep) 12%, transparent) 0%,
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 40% 30% at 50% 108%,
+      color-mix(in srgb, var(--color-mineral) 70%, transparent) 0%,
+      transparent 65%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-mineral) 35%, var(--color-chalk)) 0%,
+      var(--color-chalk) 42%,
+      color-mix(in srgb, var(--color-mineral) 28%, var(--color-chalk)) 100%
+    );
+}
+
+/* Зеркальный акцент — соседняя секция не клонирует пятна 1:1 */
+.section-atmosphere-b {
+  background:
+    radial-gradient(
+      ellipse 52% 44% at 86% 22%,
+      color-mix(in srgb, var(--color-pool) 13%, transparent) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 48% 40% at 14% 78%,
+      color-mix(in srgb, var(--color-pool-deep) 11%, transparent) 0%,
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 36% 28% at 48% -8%,
+      color-mix(in srgb, var(--color-mineral) 65%, transparent) 0%,
+      transparent 65%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-mineral) 30%, var(--color-chalk)) 0%,
+      var(--color-chalk) 48%,
+      color-mix(in srgb, var(--color-mineral) 32%, var(--color-chalk)) 100%
+    );
+}
+
+.section-atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: multiply;
+}
+
+.section-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(48px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.section-orb-a {
+  top: 8%;
+  left: -6%;
+  width: min(52vw, 28rem);
+  height: min(52vw, 28rem);
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-pool) 22%, transparent) 0%,
+    transparent 70%
+  );
+}
+
+.section-orb-b {
+  right: -8%;
+  bottom: 6%;
+  width: min(48vw, 26rem);
+  height: min(48vw, 26rem);
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-pool-deep) 18%, transparent) 0%,
+    transparent 72%
+  );
+}
+
+.section-orb-c {
+  top: 42%;
+  left: 42%;
+  width: min(36vw, 20rem);
+  height: min(36vw, 20rem);
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-pool) 12%, transparent) 0%,
+    transparent 70%
+  );
+}
+
+.section-atmosphere-b .section-orb-a {
+  top: auto;
+  left: auto;
+  right: -6%;
+  bottom: 12%;
+}
+
+.section-atmosphere-b .section-orb-b {
+  right: auto;
+  bottom: auto;
+  left: -8%;
+  top: 4%;
+}
+
+.section-atmosphere-b .section-orb-c {
+  top: 55%;
+  left: 28%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .section-orb-a {
+    animation: section-orb-a 22s ease-in-out infinite;
+  }
+  .section-orb-b {
+    animation: section-orb-b 28s ease-in-out infinite;
+  }
+  .section-orb-c {
+    animation: section-orb-c 18s ease-in-out infinite;
+  }
+}
+
+/* Список расписания — лёгкое стекло поверх атмосферы */
+.schedule-panel {
+  background: color-mix(in srgb, var(--color-steam) 88%, transparent);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 12px 40px rgba(16, 20, 24, 0.04);
+}
+
 @utility animate-faq-plus {
   animation: faq-plus-pop 280ms cubic-bezier(0.22, 1, 0.36, 1);
 }

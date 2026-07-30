@@ -1,13 +1,29 @@
 "use client";
 
-import { type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { useLocale } from "next-intl";
+import { usePathname } from "@/lib/i18n/navigation";
 
-/** Page enter: fade + едва заметный scale 0.99→1 */
+/** Сохраняется между remount template — чтобы смена языка не мигала fade */
+let lastNav: { path: string; locale: string } | null = null;
+
+/** Page enter: fade + едва заметный scale 0.99→1 (не при смене только locale) */
 export default function Template({ children }: { children: ReactNode }) {
   const reduce = useReducedMotion();
+  const pathname = usePathname();
+  const locale = useLocale();
 
-  if (reduce) {
+  const localeOnly =
+    lastNav !== null &&
+    lastNav.path === pathname &&
+    lastNav.locale !== locale;
+
+  useEffect(() => {
+    lastNav = { path: pathname, locale };
+  }, [pathname, locale]);
+
+  if (reduce || localeOnly) {
     return <>{children}</>;
   }
 

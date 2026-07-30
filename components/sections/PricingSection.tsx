@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/lib/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
+import { SectionAtmosphere } from "@/components/motion/SectionAtmosphere";
 import { PriceDisplay } from "@/components/ui/PriceDisplay";
 import { PriceCard } from "@/components/ui/PriceCard";
 import { useLead } from "@/components/lead/LeadProvider";
@@ -55,8 +56,14 @@ export function PricingSection({
   };
 
   return (
-    <section id="pricing" ref={sectionRef} className="scroll-mt-24 section-y">
-      <div className="container-content">
+    <section
+      id="pricing"
+      ref={sectionRef}
+      className="relative scroll-mt-24 overflow-hidden section-y"
+    >
+      <SectionAtmosphere variant="a" />
+
+      <div className="container-content relative z-[1]">
         <Reveal>
           <div className="mb-10 flex items-end justify-between gap-6 lg:mb-12">
             <Heading className="font-display text-display-section text-ink">

@@ -115,7 +115,7 @@ export function ScheduleBoard() {
         {items.length === 0 ? (
           <p className="text-ink/70">{t("empty")}</p>
         ) : (
-          <ul className="border-y border-mineral">
+          <ul className="schedule-panel border-y border-mineral">
             {items.map((item) => (
               <ScheduleRow
                 key={item.id}

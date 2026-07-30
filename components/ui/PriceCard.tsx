@@ -91,15 +91,15 @@ export function PriceCard({
     recommended
       ? cn(
           "gradient-pool-year bg-ink text-chalk",
-          "shadow-[0_2px_8px_rgba(16,20,24,0.04),0_12px_32px_rgba(16,20,24,0.06)]",
+          "shadow-[0_2px_8px_rgba(16,20,24,0.04),0_12px_32px_rgba(16,20,24,0.06),0_0_0_1px_rgba(13,110,124,0.18)]",
           canHover &&
-            "hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(16,20,24,0.10)]",
+            "hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(16,20,24,0.12),0_0_48px_rgba(13,110,124,0.22)]",
         )
       : cn(
-          "bg-steam text-ink",
+          "bg-steam/92 text-ink backdrop-blur-[2px]",
           "shadow-[0_2px_8px_rgba(16,20,24,0.04),0_12px_32px_rgba(16,20,24,0.06)]",
           canHover &&
-            "hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(16,20,24,0.10)]",
+            "hover:-translate-y-1 hover:bg-steam hover:shadow-[0_16px_40px_rgba(16,20,24,0.10),0_8px_32px_rgba(13,110,124,0.08)]",
         ),
     className,
   );
@@ -210,6 +210,7 @@ export function PriceCard({
               "radius-pill absolute left-1/2 top-[-14px] z-[2] -translate-x-1/2",
               "bg-chalk px-3 py-1 font-mono-label whitespace-nowrap text-ink",
               "shadow-[0_2px_8px_rgba(16,20,24,0.08)]",
+              "motion-safe:animate-badge-pulse",
             )}
           >
             {t("badge")}

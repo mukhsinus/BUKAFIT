@@ -5,6 +5,7 @@ import { LayoutGroup, motion, useReducedMotion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/lib/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
+import { SectionAtmosphere } from "@/components/motion/SectionAtmosphere";
 import { ScheduleRow } from "@/components/ui/ScheduleRow";
 import {
   getCurrentClass,
@@ -29,8 +30,10 @@ export function SchedulePreview() {
   const items = useMemo(() => getScheduleForDay(day).slice(0, 8), [day]);
 
   return (
-    <section id="schedule" className="section-y">
-      <div className="container-content">
+    <section id="schedule" className="relative overflow-hidden section-y">
+      <SectionAtmosphere variant="b" />
+
+      <div className="container-content relative z-[1]">
         <Reveal>
           <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
             <h2 className="font-display text-display-section text-ink">
@@ -106,7 +109,7 @@ export function SchedulePreview() {
             {items.length === 0 ? (
               <p className="text-ink/70">{t("empty")}</p>
             ) : (
-              <ul className="border-y border-mineral">
+              <ul className="schedule-panel border-y border-mineral">
                 {items.map((item) => (
                   <ScheduleRow
                     key={item.id}

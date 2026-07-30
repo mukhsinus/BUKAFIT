@@ -4,6 +4,7 @@ import { TypographicBlock } from "@/components/ui/TypographicBlock";
 import { ScheduleBoard } from "@/components/sections/ScheduleBoard";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Reveal } from "@/components/motion/Reveal";
+import { SectionAtmosphere } from "@/components/motion/SectionAtmosphere";
 import { buildPageMetadata } from "@/lib/seo";
 import type { AppLocale } from "@/lib/i18n/routing";
 
@@ -29,8 +30,9 @@ export default async function SchedulePage({ params }: PageProps) {
 
   return (
     <>
-      <section className="section-y">
-        <div className="container-content">
+      <section className="relative overflow-hidden section-y">
+        <SectionAtmosphere variant="b" />
+        <div className="container-content relative z-[1]">
           <Reveal>
             <TypographicBlock
               title={t("title")}

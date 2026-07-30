@@ -27,9 +27,9 @@ export function ScheduleRow({
   return (
     <li
       className={cn(
-        "relative border-b border-mineral last:border-b-0 transition-colors duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",
-        "[@media(hover:hover)]:hover:bg-mineral",
-        isNow && "bg-mineral/40",
+        "relative border-b border-mineral/80 last:border-b-0 transition-colors duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",
+        "[@media(hover:hover)]:hover:bg-pool/[0.06]",
+        isNow && "bg-pool/[0.07]",
       )}
     >
       {isNow ? (
@@ -45,7 +45,7 @@ export function ScheduleRow({
           aria-hidden
         />
       ) : null}
-      <div className="grid grid-cols-[4.5rem_1fr] items-baseline gap-3 py-3.5 pl-4 pr-0 sm:grid-cols-[5.5rem_1fr_auto] sm:gap-4 sm:py-4 sm:pl-5 md:pl-6">
+      <div className="grid grid-cols-[4.5rem_1fr] items-baseline gap-3 px-4 py-3.5 sm:grid-cols-[5.5rem_minmax(0,1fr)_auto] sm:gap-4 sm:px-5 sm:py-4 md:px-6">
         <div className="flex flex-col gap-1">
           {isNow && nowLabel ? (
             <span className="font-mono-label text-pool">{nowLabel}</span>
@@ -54,10 +54,10 @@ export function ScheduleRow({
             {item.time}
           </span>
         </div>
-        <p className="text-[0.9375rem] font-medium text-ink md:text-base">
+        <p className="min-w-0 text-[0.9375rem] font-medium text-ink md:text-base">
           {item.title[locale]}
         </p>
-        <p className="col-span-2 font-mono-label text-ink/55 sm:col-span-1 sm:text-right">
+        <p className="col-span-2 min-w-0 font-mono-label text-ink/55 sm:col-span-1 sm:max-w-[12rem] sm:truncate sm:text-right md:max-w-none md:overflow-visible md:whitespace-nowrap">
           {hallLabels[item.hall][locale]}
         </p>
       </div>
